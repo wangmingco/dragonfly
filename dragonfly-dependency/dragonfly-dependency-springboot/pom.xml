@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>co.wangming</groupId>
+        <artifactId>dragonfly-dependency</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>dragonfly-dependency-springboot</artifactId>
+
+    <properties>
+        <java.source.version>1.8</java.source.version>
+        <java.target.version>1.8</java.target.version>
+        <maven.compiler.version>3.8.1</maven.compiler.version>
+        <file.encoding>UTF-8</file.encoding>
+        <maven.jar.version>3.2.0</maven.jar.version>
+        <springboot.version>2.5.4</springboot.version>
+    </properties>
+
+    <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-milestone</id>
+            <name>Spring Milestone</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshot</id>
+            <name>Spring Snapshot</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>rabbit-milestone</id>
+            <name>Rabbit Milestone</name>
+            <url>https://dl.bintray.com/rabbitmq/maven-milestones</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-milestone</id>
+            <name>Spring Milestone</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>spring-snapshot</id>
+            <name>Spring Snapshot</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <!--    <build>-->
+    <!--        <resources>-->
+    <!--            <resource>-->
+    <!--                <directory>src/main/resources/</directory>-->
+    <!--                <filtering>false</filtering>-->
+    <!--            </resource>-->
+    <!--            <resource>-->
+    <!--                <directory>../</directory>-->
+    <!--                <targetPath>META-INF/</targetPath>-->
+    <!--                <filtering>false</filtering>-->
+    <!--                <includes>-->
+    <!--                    <include>NOTICE</include>-->
+    <!--                    <include>LICENSE</include>-->
+    <!--                </includes>-->
+    <!--            </resource>-->
+    <!--        </resources>-->
+    <!--        <plugins>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                <artifactId>maven-jar-plugin</artifactId>-->
+    <!--                <version>${maven.jar.version}</version>-->
+    <!--                <configuration>-->
+    <!--                    <archive>-->
+    <!--                        <addMavenDescriptor>true</addMavenDescriptor>-->
+    <!--                        <index>true</index>-->
+    <!--                        <manifest>-->
+    <!--                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>-->
+    <!--                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>-->
+    <!--                        </manifest>-->
+    <!--                        <manifestEntries>-->
+    <!--                            <Specification-Version>${project.version}</Specification-Version>-->
+    <!--                            <Implementation-Version>${project.version}</Implementation-Version>-->
+    <!--                        </manifestEntries>-->
+    <!--                    </archive>-->
+    <!--                </configuration>-->
+    <!--            </plugin>-->
+
+    <!--            <plugin>-->
+    <!--                <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                <artifactId>maven-compiler-plugin</artifactId>-->
+    <!--                <version>${maven.compiler.version}</version>-->
+    <!--                <configuration>-->
+    <!--                    <compilerArgs>-->
+    <!--                        <compilerArg>-parameters</compilerArg>-->
+    <!--                    </compilerArgs>-->
+    <!--                    <fork>true</fork>-->
+    <!--                    <source>${java.source.version}</source>-->
+    <!--                    <target>${java.target.version}</target>-->
+    <!--                    <encoding>${file.encoding}</encoding>-->
+    <!--                </configuration>-->
+    <!--            </plugin>-->
+    <!--        </plugins>-->
+    <!--    </build>-->
+
+</project>
