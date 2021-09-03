@@ -20,11 +20,9 @@
 
     <modules>
         <module>dragonfly-common</module>
-        <module>dragonfly-dependency</module>
+        <module>dragonfly-admin</module>
         <module>dragonfly-agent</module>
-        <module>dragonfly-agent-examples</module>
-        <module>dragonfly-admin-server</module>
-        <module>dragonfly-fetch-server</module>
+        <module>dragonfly-server</module>
     </modules>
 
     <dependencies>

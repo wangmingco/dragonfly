@@ -6,18 +6,12 @@
 
     <parent>
         <groupId>co.wangming</groupId>
-        <artifactId>dragonfly</artifactId>
+        <artifactId>dragonfly-agent-plugins</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dragonfly-common</artifactId>
+    <artifactId>dragonfly-agent-plugin-jdbc</artifactId>
 
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>dragonfly-util</module>
-        <module>dragonfly-dependency-springboot</module>
-    </modules>
 
 </project>

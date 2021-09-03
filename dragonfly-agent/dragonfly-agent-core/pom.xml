@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,26 +6,63 @@
 
     <parent>
         <groupId>co.wangming</groupId>
-        <artifactId>dragonfly</artifactId>
+        <artifactId>dragonfly-agent</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dragonfly-agent</artifactId>
-
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>dragonfly-agent-core</module>
-        <module>dragonfly-agent-jar</module>
-        <module>dragonfly-agent-examples</module>
-        <module>dragonfly-agent-plugins</module>
-    </modules>
+    <artifactId>dragonfly-agent-core</artifactId>
 
     <properties>
+        <logback.version>1.2.3</logback.version>
+        <bytebuddy.version>1.11.14</bytebuddy.version>
+        <reflections.version>0.9.12</reflections.version>
         <shade.version>3.2.0</shade.version>
         <compiler.version>3.6.0</compiler.version>
+        <zipkin.version>2.16.3</zipkin.version>
     </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>${bytebuddy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>${bytebuddy.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>${reflections.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zipkin.reporter2</groupId>
+            <artifactId>zipkin-reporter</artifactId>
+            <version>${zipkin.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.zipkin.reporter2</groupId>
+            <artifactId>zipkin-sender-okhttp3</artifactId>
+            <version>${zipkin.version}</version>
+        </dependency>
+
+
+    </dependencies>
 
     <build>
         <plugins>

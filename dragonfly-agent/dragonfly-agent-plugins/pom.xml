@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,18 +6,17 @@
 
     <parent>
         <groupId>co.wangming</groupId>
-        <artifactId>dragonfly</artifactId>
+        <artifactId>dragonfly-agent</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dragonfly-common</artifactId>
+    <artifactId>dragonfly-agent-plugins</artifactId>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>dragonfly-util</module>
-        <module>dragonfly-dependency-springboot</module>
+        <module>dragonfly-agent-plugin-jdbc</module>
     </modules>
 
 </project>

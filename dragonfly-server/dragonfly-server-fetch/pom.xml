@@ -8,10 +8,10 @@
         <groupId>co.wangming</groupId>
         <artifactId>dragonfly-dependency-springboot</artifactId>
         <version>${revision}</version>
-        <relativePath>../dragonfly-dependency/dragonfly-dependency-springboot/pom.xml</relativePath>
+        <relativePath>../../dragonfly-common/dragonfly-dependency-springboot/pom.xml</relativePath>
     </parent>
 
-    <artifactId>dragonfly-fetch-server</artifactId>
+    <artifactId>dragonfly-server-fetch</artifactId>
 
     <dependencies>
         <dependency>

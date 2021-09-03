@@ -11,13 +11,12 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dragonfly-common</artifactId>
+    <artifactId>dragonfly-admin</artifactId>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>dragonfly-util</module>
-        <module>dragonfly-dependency-springboot</module>
+        <module>dragonfly-admin-server</module>
     </modules>
 
 </project>

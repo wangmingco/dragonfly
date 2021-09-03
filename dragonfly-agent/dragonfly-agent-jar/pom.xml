@@ -6,26 +6,37 @@
 
     <parent>
         <groupId>co.wangming</groupId>
-        <artifactId>dragonfly</artifactId>
+        <artifactId>dragonfly-agent</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dragonfly-agent</artifactId>
-
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>dragonfly-agent-core</module>
-        <module>dragonfly-agent-jar</module>
-        <module>dragonfly-agent-examples</module>
-        <module>dragonfly-agent-plugins</module>
-    </modules>
+    <artifactId>dragonfly-agent-jar</artifactId>
 
     <properties>
+        <logback.version>1.2.3</logback.version>
+        <bytebuddy.version>1.11.14</bytebuddy.version>
+        <reflections.version>0.9.12</reflections.version>
         <shade.version>3.2.0</shade.version>
         <compiler.version>3.6.0</compiler.version>
+        <zipkin.version>2.16.3</zipkin.version>
     </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-agent</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-agent-plugin-jdbc</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <plugins>

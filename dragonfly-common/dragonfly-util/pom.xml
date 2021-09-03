@@ -6,29 +6,22 @@
 
     <parent>
         <groupId>co.wangming</groupId>
-        <artifactId>dragonfly</artifactId>
+        <artifactId>dragonfly-common</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dragonfly-agent-examples</artifactId>
-
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>dragonfly-example-simple</module>
-    </modules>
+    <artifactId>dragonfly-util</artifactId>
 
     <properties>
-        <logback.version>1.2.3</logback.version>
+        <elasticsearch.version>7.14.0</elasticsearch.version>
     </properties>
 
     <dependencies>
-
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>${elasticsearch.version}</version>
         </dependency>
 
     </dependencies>

@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>co.wangming</groupId>
-        <artifactId>dragonfly-dependency</artifactId>
+        <artifactId>dragonfly-common</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>

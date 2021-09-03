@@ -6,17 +6,31 @@
 
     <parent>
         <groupId>co.wangming</groupId>
-        <artifactId>dragonfly</artifactId>
+        <artifactId>dragonfly-agent</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dragonfly-dependency</artifactId>
+    <artifactId>dragonfly-agent-examples</artifactId>
 
     <packaging>pom</packaging>
 
     <modules>
-        <module>dragonfly-dependency-springboot</module>
+        <module>dragonfly-example-simple</module>
     </modules>
+
+    <properties>
+        <logback.version>1.2.3</logback.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
