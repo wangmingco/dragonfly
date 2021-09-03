@@ -15,7 +15,7 @@
 
     <properties>
         <logback.version>1.2.3</logback.version>
-        <bytebuddy.version>1.10.18</bytebuddy.version>
+        <bytebuddy.version>1.11.14</bytebuddy.version>
         <reflections.version>0.9.12</reflections.version>
         <shade.version>3.2.0</shade.version>
         <compiler.version>3.6.0</compiler.version>

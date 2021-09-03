@@ -1,5 +1,9 @@
-package co.wangming.dragonfly.agent.interceptor.advise;
+package co.wangming.dragonfly.agent.interceptor;
 
+import co.wangming.dragonfly.agent.interceptor.advise.AdviseContext;
+import co.wangming.dragonfly.agent.interceptor.advise.MatchableMethodAdvise;
+import co.wangming.dragonfly.agent.interceptor.advise.MethodAdvise;
+import co.wangming.dragonfly.agent.interceptor.advise.component.ClassAdviseComponent;
 import co.wangming.dragonfly.agent.util.ClassUtil;
 import net.bytebuddy.implementation.bind.annotation.*;
 import org.slf4j.Logger;
@@ -23,7 +27,7 @@ public class MethodAdviseInterceptor {
     private static void init() {
         LOGGER.debug("构建 MethodAdviseInterceptor");
 
-        Set<Class<?>> classes = ClassUtil.getTypesAnnotatedWith(AdviseComponent.class);
+        Set<Class<?>> classes = ClassUtil.getTypesAnnotatedWith(ClassAdviseComponent.class);
         if (classes == null || classes.size() == 0) {
             LOGGER.warn("没有找到 AdviseComponent ");
             return;
@@ -35,14 +39,12 @@ public class MethodAdviseInterceptor {
         List<MethodAdviseWrapper> methodAdviseList = new ArrayList<>();
 
         for (Class<?> aClass : classes) {
-            AdviseComponent adviseComponent = aClass.getAnnotation(AdviseComponent.class);
-            int order = adviseComponent.order;
+            ClassAdviseComponent classAdviseComponent = aClass.getAnnotation(ClassAdviseComponent.class);
             try {
                 MethodAdviseWrapper methodAdviseWrapper = new MethodAdviseWrapper();
                 methodAdviseWrapper.methodAdvise = (MethodAdvise) aClass.newInstance();
-                methodAdviseWrapper.order = order;
+                methodAdviseWrapper.order = classAdviseComponent.order();
                 methodAdviseList.add(methodAdviseWrapper);
-
             } catch (InstantiationException e) {
                 LOGGER.error("{} 实例化异常", aClass.getName(), e);
                 break;
@@ -86,6 +88,11 @@ public class MethodAdviseInterceptor {
         final Map<String, AdviseContext> contextMap = new HashMap<>();
 
         for (MethodAdviseWrapper methodAdviseWrapper : adviseList) {
+
+            if (mactchClass(clazz, methodAdviseWrapper.methodAdvise)) {
+                continue;
+            }
+
             AdviseContext adviseContext = AdviseContext.enterBefore();
             try {
                 methodAdviseWrapper.methodAdvise.beforeExec(clazz, method, thisObj, allArguments, adviseContext);
@@ -101,6 +108,11 @@ public class MethodAdviseInterceptor {
             return callable.call();
         } catch (Exception e) {
             for (MethodAdviseWrapper methodAdviseWrapper : adviseList) {
+
+                if (mactchClass(clazz, methodAdviseWrapper.methodAdvise)) {
+                    continue;
+                }
+
                 AdviseContext context = contextMap.get(methodAdviseWrapper.methodAdvise.getClass().getCanonicalName());
                 context.enterException();
                 try {
@@ -114,6 +126,11 @@ public class MethodAdviseInterceptor {
             throw e;
         } finally {
             for (MethodAdviseWrapper methodAdviseWrapper : adviseList) {
+
+                if (mactchClass(clazz, methodAdviseWrapper.methodAdvise)) {
+                    continue;
+                }
+
                 AdviseContext context = contextMap.get(methodAdviseWrapper.methodAdvise.getClass().getCanonicalName());
                 context.enterAfter();
                 try {
@@ -127,6 +144,14 @@ public class MethodAdviseInterceptor {
             LOGGER.debug("{}#{} intercept执行完成", clazz.getName(), method.getName());
         }
 
+    }
+
+    private static boolean mactchClass(Class clazz, MethodAdvise methodAdvise) {
+        if (methodAdvise instanceof MatchableMethodAdvise &&
+                !((MatchableMethodAdvise) methodAdvise).matches(clazz)) {
+            return true;
+        }
+        return false;
     }
 
 

@@ -1,6 +1,6 @@
 package co.wangming.dragonfly.agent.transform.unit;
 
-import co.wangming.dragonfly.agent.interceptor.advise.MethodAdviseInterceptor;
+import co.wangming.dragonfly.agent.interceptor.MethodAdviseInterceptor;
 import co.wangming.dragonfly.agent.transform.TransformerComponent;
 import co.wangming.dragonfly.agent.util.Constant;
 import net.bytebuddy.agent.builder.AgentBuilder;

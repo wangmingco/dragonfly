@@ -1,0 +1,25 @@
+name: Sync Gitee Repos To Github
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Sync Gitee Repos To Github
+        uses: Yikun/hub-mirror-action@v1.0
+        with:
+          src: gitee/wangmingco
+          dst: github/wangmingco
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          account_type: user
+          clone_style: "ssh"
+          debug: true
+          force_update: true
+          static_list: "dragonfly"
+          timeout: '600s'
