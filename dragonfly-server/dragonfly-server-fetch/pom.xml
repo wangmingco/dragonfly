@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>co.wangming</groupId>
-            <artifactId>dragonfly-common</artifactId>
+            <artifactId>dragonfly-util</artifactId>
             <version>${version}</version>
         </dependency>
 
