@@ -9,17 +9,17 @@ public abstract class MatchableMethodAdvise implements MethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MatchableMethodAdvise.class);
 
-    private Matcher.Matchable matchable;
+    private Matcher.Matchable classMatcher;
 
     public MatchableMethodAdvise() {
-        matchable = buildMatchable();
+        classMatcher = buildClassMatcher();
     }
 
-    protected abstract Matcher.Matchable buildMatchable();
+    protected abstract Matcher.Matchable buildClassMatcher();
 
     public boolean matches(Class clazz) {
         TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(clazz);
-        return matchable.matches(forLoadedType, clazz.getClassLoader(), null, null, null);
+        return classMatcher.matches(forLoadedType, clazz.getClassLoader(), null, null, null);
 
     }
 

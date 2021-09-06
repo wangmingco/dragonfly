@@ -19,10 +19,15 @@
         <reflections.version>0.9.12</reflections.version>
         <shade.version>3.2.0</shade.version>
         <compiler.version>3.6.0</compiler.version>
-        <zipkin.version>2.16.3</zipkin.version>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-lib-zipkin</artifactId>
+            <version>${version}</version>
+        </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -48,19 +53,6 @@
             <artifactId>reflections</artifactId>
             <version>${reflections.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>io.zipkin.reporter2</groupId>
-            <artifactId>zipkin-reporter</artifactId>
-            <version>${zipkin.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.zipkin.reporter2</groupId>
-            <artifactId>zipkin-sender-okhttp3</artifactId>
-            <version>${zipkin.version}</version>
-        </dependency>
-
 
     </dependencies>
 

@@ -16,7 +16,13 @@
     <dependencies>
         <dependency>
             <groupId>co.wangming</groupId>
-            <artifactId>dragonfly-util</artifactId>
+            <artifactId>dragonfly-lib-zipkin</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-lib-elasticsearch</artifactId>
             <version>${version}</version>
         </dependency>
 

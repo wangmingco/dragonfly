@@ -13,5 +13,12 @@
 
     <artifactId>dragonfly-agent-plugin-jdbc</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-agent-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -1,5 +1,6 @@
-package co.wangming.dragonfly.agent.trace;
+package co.wangming.dragonfly.lib.zipkin;
 
+import org.junit.Test;
 import zipkin2.Endpoint;
 import zipkin2.Span;
 import zipkin2.codec.SpanBytesEncoder;
@@ -9,9 +10,10 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class ZipkinClient {
+public class ZipkinOkHttpTest {
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void send() throws Exception {
 
         try (OkHttpSender sender = OkHttpSender.create("http://127.0.0.1:9411/api/v2/spans")) {
             List<byte[]> spans = asList(SpanBytesEncoder.JSON_V2.encode(buildSpan()));

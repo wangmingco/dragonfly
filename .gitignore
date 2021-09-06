@@ -32,10 +32,6 @@ target/
 # system ignore
 .DS_Store
 Thumbs.db
-*.orig
-
-# license check result
-license-list
 
 # spec
 bin/zipkin-server-2.23.1-exec.jar

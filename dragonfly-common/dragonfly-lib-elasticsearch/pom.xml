@@ -6,19 +6,25 @@
 
     <parent>
         <groupId>co.wangming</groupId>
-        <artifactId>dragonfly</artifactId>
+        <artifactId>dragonfly-common</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dragonfly-common</artifactId>
+    <artifactId>dragonfly-lib-elasticsearch</artifactId>
 
-    <packaging>pom</packaging>
+    <properties>
+        <elasticsearch.version>7.14.0</elasticsearch.version>
+    </properties>
 
-    <modules>
-        <module>dragonfly-dependency-springboot</module>
-        <module>dragonfly-lib-zipkin</module>
-        <module>dragonfly-lib-elasticsearch</module>
-    </modules>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
