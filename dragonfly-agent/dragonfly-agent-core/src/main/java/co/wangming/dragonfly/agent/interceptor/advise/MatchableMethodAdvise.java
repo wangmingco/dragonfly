@@ -1,6 +1,6 @@
 package co.wangming.dragonfly.agent.interceptor.advise;
 
-import co.wangming.dragonfly.agent.util.Matcher;
+import co.wangming.dragonfly.agent.bytebuddy.Matcher;
 import net.bytebuddy.description.type.TypeDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,17 +9,16 @@ public abstract class MatchableMethodAdvise implements MethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MatchableMethodAdvise.class);
 
-    private Matcher.Matchable classMatcher;
+    private Matcher matcher;
 
     public MatchableMethodAdvise() {
-        classMatcher = buildClassMatcher();
+        matcher = buildClassMatcher();
     }
 
-    protected abstract Matcher.Matchable buildClassMatcher();
+    protected abstract Matcher buildClassMatcher();
 
     public boolean matches(Class clazz) {
-        TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(clazz);
-        return classMatcher.matches(forLoadedType, clazz.getClassLoader(), null, null, null);
+        return matcher.matches(new TypeDescription.ForLoadedType(clazz));
 
     }
 

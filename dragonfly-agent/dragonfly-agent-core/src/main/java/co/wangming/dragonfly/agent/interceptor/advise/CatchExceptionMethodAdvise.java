@@ -1,7 +1,7 @@
 package co.wangming.dragonfly.agent.interceptor.advise;
 
+import co.wangming.dragonfly.agent.bytebuddy.Matcher;
 import co.wangming.dragonfly.agent.interceptor.advise.component.ClassAdviseComponent;
-import co.wangming.dragonfly.agent.util.Matcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,8 +15,8 @@ public class CatchExceptionMethodAdvise extends MatchableMethodAdvise {
     private static final Logger LOGGER = LoggerFactory.getLogger(CatchExceptionMethodAdvise.class);
 
     @Override
-    protected Matcher.Matchable buildClassMatcher() {
-        return Matcher.build().type(any());
+    protected Matcher buildClassMatcher() {
+        return Matcher.of(any());
     }
 
     @Override
