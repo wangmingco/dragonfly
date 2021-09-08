@@ -5,26 +5,26 @@ import net.bytebuddy.matcher.ElementMatcher;
 
 import static net.bytebuddy.matcher.ElementMatchers.isMethod;
 
-public class MethodMatcher implements ElementMatcher.Junction<MethodDescription> {
+public class MethodMatcher<T extends MethodDescription> implements ElementMatcher.Junction<T> {
 
-    private ElementMatcher.Junction<MethodDescription> methodMatcher;
+    private Junction<MethodDescription> methodMatcher;
 
     public MethodMatcher(ElementMatcher<MethodDescription> matcher) {
         methodMatcher = isMethod().and(matcher);
     }
 
     @Override
-    public Junction<MethodDescription> and(ElementMatcher other) {
-        Junction<MethodDescription> newMethodMatcher = methodMatcher.and(other);
+    public <U extends T> Junction<U> and(ElementMatcher<? super U> other) {
+        Junction newMethodMatcher = methodMatcher.and(other);
         methodMatcher = newMethodMatcher;
-        return this.methodMatcher;
+        return newMethodMatcher;
     }
 
     @Override
-    public Junction<MethodDescription> or(ElementMatcher other) {
-        Junction<MethodDescription> newMethodMatcher = methodMatcher.and(other);
+    public <U extends T> Junction<U> or(ElementMatcher<? super U> other) {
+        Junction newMethodMatcher = methodMatcher.and(other);
         methodMatcher = newMethodMatcher;
-        return this.methodMatcher;
+        return newMethodMatcher;
     }
 
     @Override

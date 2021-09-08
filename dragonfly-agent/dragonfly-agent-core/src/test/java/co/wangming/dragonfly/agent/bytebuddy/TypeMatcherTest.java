@@ -1,6 +1,5 @@
-package co.wangming.dragonfly.agent.util;
+package co.wangming.dragonfly.agent.bytebuddy;
 
-import co.wangming.dragonfly.agent.bytebuddy.TypeMatcher;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 import org.junit.Assert;
@@ -8,7 +7,7 @@ import org.junit.Test;
 
 import static net.bytebuddy.matcher.ElementMatchers.*;
 
-public class MatcherTest {
+public class TypeMatcherTest {
 
     @Test
     public void testMatched() {

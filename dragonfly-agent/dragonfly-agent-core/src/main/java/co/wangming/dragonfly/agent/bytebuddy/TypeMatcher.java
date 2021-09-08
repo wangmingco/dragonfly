@@ -4,41 +4,50 @@ import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDefinition;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
-import net.bytebuddy.matcher.TypeSortMatcher;
 
-public class TypeMatcher implements ElementMatcher.Junction<TypeDescription> {
+public class TypeMatcher<T extends TypeDescription> implements ElementMatcher.Junction<T> {
 
-    public static TypeMatcher of(ElementMatcher<? super TypeDefinition> matcher) {
+    public static TypeMatcher of(ElementMatcher<TypeDefinition> matcher) {
         return new TypeMatcher(matcher);
     }
 
-    private Junction typeSortMatcher;
+    private Junction<T> typeSortMatcher;
 
-    public TypeMatcher(ElementMatcher<? super TypeDefinition> matcher) {
-        typeSortMatcher = new TypeSortMatcher(matcher);
+    public TypeMatcher(ElementMatcher<T> matcher) {
+        typeSortMatcher = new JunctionMapper(matcher);
     }
 
     @Override
-    public Junction and(ElementMatcher other) {
+    public <U extends T> Junction<U> and(ElementMatcher<? super U> other) {
         Junction newMatcher = typeSortMatcher.and(other);
         this.typeSortMatcher = newMatcher;
-        return this.typeSortMatcher;
+        return newMatcher;
     }
 
     @Override
-    public Junction or(ElementMatcher other) {
+    public <U extends T> Junction<U> or(ElementMatcher<? super U> other) {
         Junction newMatcher = typeSortMatcher.or(other);
         this.typeSortMatcher = newMatcher;
-        return this.typeSortMatcher;
+        return newMatcher;
     }
 
     @Override
-    public boolean matches(TypeDescription target) {
+    public boolean matches(T target) {
         return this.typeSortMatcher.matches(target);
     }
 
-    public boolean matches(MethodDescription target) {
-        return this.methodMatcher.matches(target);
+    public static class JunctionMapper<T extends TypeDescription> extends ElementMatcher.Junction.AbstractBase<T> {
+
+        private ElementMatcher<T> matcher;
+
+        private JunctionMapper(ElementMatcher<T> matcher) {
+            this.matcher = matcher;
+        }
+
+        @Override
+        public boolean matches(T target) {
+            return matcher.matches(target);
+        }
     }
 
     private MethodMatcher methodMatcher;
@@ -48,5 +57,8 @@ public class TypeMatcher implements ElementMatcher.Junction<TypeDescription> {
         return methodMatcher;
     }
 
+    public boolean matches(MethodDescription target) {
+        return this.methodMatcher.matches(target);
+    }
 
 }
