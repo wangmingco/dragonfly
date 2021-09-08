@@ -1,44 +1,35 @@
 package co.wangming.dragonfly.agent.util;
 
-import net.bytebuddy.description.method.MethodDescription;
+import co.wangming.dragonfly.agent.bytebuddy.TypeMatcher;
+import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
-import net.bytebuddy.matcher.MethodSortMatcher;
-import net.bytebuddy.matcher.TypeSortMatcher;
+import org.junit.Assert;
 import org.junit.Test;
 
-import static net.bytebuddy.matcher.ElementMatchers.any;
+import static net.bytebuddy.matcher.ElementMatchers.*;
 
 public class MatcherTest {
 
-//    @Test
-//    public void testMatched() {
-//
-//        Matcher.Ignored ignored = Matcher.build()
-//                .type(named("java.lang.String"))
-//                .and(not(nameStartsWith("sun.")));
-//
-//        TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(String.class);
-//        boolean result = ignored.matches(forLoadedType, String.class.getClassLoader(), null, null, null);
-//        Assert.assertEquals(true, result);
-//    }
-//
-//    @Test
-//    public void testNotMatch() {
-//
-//        Matcher.Ignored ignored = Matcher.build()
-//                .type(named("java.lang.Integer"))
-//                .and(not(nameStartsWith("sun.")));
-//
-//        TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(String.class);
-//        boolean result = ignored.matches(forLoadedType, String.class.getClassLoader(), null, null, null);
-//        Assert.assertEquals(false, result);
-//    }
+    @Test
+    public void testMatched() {
+
+        ElementMatcher.Junction matcher = TypeMatcher.of(named("java.lang.String"))
+                .and(not(nameStartsWith("sun.")));
+
+        TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(String.class);
+        boolean result = matcher.matches(forLoadedType);
+        Assert.assertEquals(true, result);
+    }
 
     @Test
-    public void test() {
-        ElementMatcher.Junction<MethodDescription> a = MethodSortMatcher.of(MethodSortMatcher.Sort.METHOD);
-        TypeSortMatcher b = new TypeSortMatcher(any());
+    public void testNotMatch() {
 
+        ElementMatcher.Junction matcher = TypeMatcher.of(named("java.lang.Integer"))
+                .and(not(nameStartsWith("sun.")));
+
+        TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(String.class);
+        boolean result = matcher.matches(forLoadedType);
+        Assert.assertEquals(false, result);
     }
 
 }
