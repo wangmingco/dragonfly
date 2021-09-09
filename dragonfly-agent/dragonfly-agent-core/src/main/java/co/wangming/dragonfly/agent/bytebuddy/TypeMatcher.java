@@ -1,20 +1,20 @@
 package co.wangming.dragonfly.agent.bytebuddy;
 
 import net.bytebuddy.description.method.MethodDescription;
-import net.bytebuddy.description.type.TypeDefinition;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 
 public class TypeMatcher<T extends TypeDescription> implements ElementMatcher.Junction<T> {
 
-    public static TypeMatcher of(ElementMatcher<TypeDefinition> matcher) {
-        return new TypeMatcher(matcher);
-    }
-
     private Junction<T> typeSortMatcher;
+    private MethodMatcher methodMatcher;
 
     public TypeMatcher(ElementMatcher<T> matcher) {
-        typeSortMatcher = new JunctionMapper(matcher);
+        typeSortMatcher = new InnerTypeMatcher(matcher);
+    }
+
+    public static <T extends TypeDescription> TypeMatcher<T> of(ElementMatcher.Junction<T> matcher) {
+        return new TypeMatcher(matcher);
     }
 
     @Override
@@ -36,22 +36,6 @@ public class TypeMatcher<T extends TypeDescription> implements ElementMatcher.Ju
         return this.typeSortMatcher.matches(target);
     }
 
-    public static class JunctionMapper<T extends TypeDescription> extends ElementMatcher.Junction.AbstractBase<T> {
-
-        private ElementMatcher<T> matcher;
-
-        private JunctionMapper(ElementMatcher<T> matcher) {
-            this.matcher = matcher;
-        }
-
-        @Override
-        public boolean matches(T target) {
-            return matcher.matches(target);
-        }
-    }
-
-    private MethodMatcher methodMatcher;
-
     public MethodMatcher method(ElementMatcher<MethodDescription> matcher) {
         methodMatcher = new MethodMatcher(matcher);
         return methodMatcher;
@@ -59,6 +43,20 @@ public class TypeMatcher<T extends TypeDescription> implements ElementMatcher.Ju
 
     public boolean matches(MethodDescription target) {
         return this.methodMatcher.matches(target);
+    }
+
+    public static class InnerTypeMatcher<T extends TypeDescription> extends ElementMatcher.Junction.AbstractBase<T> {
+
+        private ElementMatcher<T> matcher;
+
+        private InnerTypeMatcher(ElementMatcher<T> matcher) {
+            this.matcher = matcher;
+        }
+
+        @Override
+        public boolean matches(T target) {
+            return matcher.matches(target);
+        }
     }
 
 }

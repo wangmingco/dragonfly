@@ -12,18 +12,6 @@ import static java.util.Arrays.asList;
 
 public class ZipkinOkHttpTest {
 
-    @Test
-    public void send() throws Exception {
-
-        try (OkHttpSender sender = OkHttpSender.create("http://127.0.0.1:9411/api/v2/spans")) {
-            List<byte[]> spans = asList(SpanBytesEncoder.JSON_V2.encode(buildSpan()));
-            sender.sendSpans(spans).execute();
-        } catch (Exception e) {
-
-        }
-
-    }
-
     public static Span buildSpan() {
         long traceId = System.currentTimeMillis();
 
@@ -39,5 +27,17 @@ public class ZipkinOkHttpTest {
                 .remoteEndpoint(Endpoint.newBuilder().ip("172.19.0.2").port(58648).build())
                 .addAnnotation(System.currentTimeMillis(), "cs")
                 .build();
+    }
+
+    @Test
+    public void send() throws Exception {
+
+        try (OkHttpSender sender = OkHttpSender.create("http://127.0.0.1:9411/api/v2/spans")) {
+            List<byte[]> spans = asList(SpanBytesEncoder.JSON_V2.encode(buildSpan()));
+            sender.sendSpans(spans).execute();
+        } catch (Exception e) {
+
+        }
+
     }
 }

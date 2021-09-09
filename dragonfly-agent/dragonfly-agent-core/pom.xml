@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -100,15 +100,16 @@
                                 <!--                                    <shadedPattern>co.wangming.dragonfly.ch.qos.logback</shadedPattern>-->
                                 <!--                                </relocation>-->
 
+                                <!-- TODO plugin打包的时候，会发现类型不匹配-->
                                 <relocation>
                                     <pattern>net.bytebuddy</pattern>
                                     <shadedPattern>co.wangming.dragonfly.net.bytebuddy</shadedPattern>
                                 </relocation>
                                 <!-- TODO FIX -> reflections 依赖了javassist和slf4j, 在cp上有这俩个包, 排查影响范围 -->
-                                <relocation>
-                                    <pattern>org.reflections</pattern>
-                                    <shadedPattern>co.wangming.dragonfly.org.reflections</shadedPattern>
-                                </relocation>
+                                <!--                                <relocation>-->
+                                <!--                                    <pattern>org.reflections</pattern>-->
+                                <!--                                    <shadedPattern>co.wangming.dragonfly.org.reflections</shadedPattern>-->
+                                <!--                                </relocation>-->
                                 <!-- TODO FIX -> zipkin2 依赖了okhttp3, 在cp上有这包, 排查影响范围 -->
                                 <relocation>
                                     <pattern>zipkin2</pattern>

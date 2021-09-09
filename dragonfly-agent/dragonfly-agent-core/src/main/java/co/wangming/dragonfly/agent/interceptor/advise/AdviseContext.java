@@ -2,17 +2,15 @@ package co.wangming.dragonfly.agent.interceptor.advise;
 
 public class AdviseContext {
 
-    public enum Phase {
-        EnterBefore,
-        ExitBefore,
-        EnterException,
-        ExitException,
-        EnterAfter,
-        ExitAfter,
-    }
-
     private Phase currentPhase;
     private Phase lastPhase;
+
+    public static AdviseContext enterBefore() {
+        AdviseContext adviseContext = new AdviseContext();
+        adviseContext.currentPhase = Phase.EnterBefore;
+
+        return adviseContext;
+    }
 
     public Phase getCurrentPhase() {
         return currentPhase;
@@ -20,13 +18,6 @@ public class AdviseContext {
 
     public Phase getLastPhase() {
         return lastPhase;
-    }
-
-    public static AdviseContext enterBefore() {
-        AdviseContext adviseContext = new AdviseContext();
-        adviseContext.currentPhase = Phase.EnterBefore;
-
-        return adviseContext;
     }
 
     public void exitBefore() {
@@ -52,6 +43,15 @@ public class AdviseContext {
     public void exitAfter() {
         lastPhase = Phase.EnterAfter;
         currentPhase = Phase.EnterAfter;
+    }
+
+    public enum Phase {
+        EnterBefore,
+        ExitBefore,
+        EnterException,
+        ExitException,
+        EnterAfter,
+        ExitAfter,
     }
 
 }

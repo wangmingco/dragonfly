@@ -62,19 +62,6 @@ public class MethodAdviseInterceptor {
         adviseList = methodAdviseList;
     }
 
-    public static class MethodAdviseWrapper {
-        MethodAdvise methodAdvise;
-        int order;
-
-        public int order() {
-            return order;
-        }
-
-        public MethodAdvise getMethodAdvise() {
-            return methodAdvise;
-        }
-    }
-
     @RuntimeType
     public static Object intercept(@Origin Class clazz, @Origin Method method, @This Object thisObj, @AllArguments Object[] allArguments, @SuperCall Callable callable) throws Exception {
 
@@ -152,6 +139,19 @@ public class MethodAdviseInterceptor {
             return true;
         }
         return false;
+    }
+
+    public static class MethodAdviseWrapper {
+        MethodAdvise methodAdvise;
+        int order;
+
+        public int order() {
+            return order;
+        }
+
+        public MethodAdvise getMethodAdvise() {
+            return methodAdvise;
+        }
     }
 
 

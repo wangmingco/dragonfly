@@ -1,6 +1,5 @@
 package co.wangming.dragonfly.lib.zipkin;
 
-import org.junit.Test;
 import zipkin2.Endpoint;
 import zipkin2.Span;
 import zipkin2.codec.SpanBytesEncoder;
@@ -11,18 +10,6 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 public class ZipkinKafkaTest {
-
-    @Test
-    public void send() throws Exception {
-
-        try (KafkaSender sender = KafkaSender.create("127.0.0.1:9411")) {
-            List<byte[]> spans = asList(SpanBytesEncoder.JSON_V2.encode(buildSpan()));
-            sender.sendSpans(spans).execute();
-        } catch (Exception e) {
-
-        }
-
-    }
 
     public static Span buildSpan() {
         long traceId = System.currentTimeMillis();
@@ -39,5 +26,17 @@ public class ZipkinKafkaTest {
                 .remoteEndpoint(Endpoint.newBuilder().ip("172.19.0.2").port(58648).build())
                 .addAnnotation(System.currentTimeMillis(), "cs")
                 .build();
+    }
+
+    //    @Test
+    public void send() throws Exception {
+
+        try (KafkaSender sender = KafkaSender.create("127.0.0.1:9411")) {
+            List<byte[]> spans = asList(SpanBytesEncoder.JSON_V2.encode(buildSpan()));
+            sender.sendSpans(spans).execute();
+        } catch (Exception e) {
+
+        }
+
     }
 }

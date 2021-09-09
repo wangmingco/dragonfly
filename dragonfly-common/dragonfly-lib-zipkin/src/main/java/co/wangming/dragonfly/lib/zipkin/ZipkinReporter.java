@@ -15,6 +15,8 @@ public enum ZipkinReporter {
     HTTP("HTTP", "http://127.0.0.1:9411/api/v2/spans"),
     KAFKA("KAFKA", "127.0.0.1:9411");
 
+    private AsyncReporter asyncReporter;
+
     ZipkinReporter(String type, String IP) {
         Sender sender;
         switch (type) {
@@ -32,8 +34,6 @@ public enum ZipkinReporter {
         }
         asyncReporter = AsyncReporter.create(sender);
     }
-
-    private AsyncReporter asyncReporter;
 
     public void sendCS(String traceId, String parentTraceId, String name, Map data) {
         send(buildSpan("cs", traceId, parentTraceId, name, data));
