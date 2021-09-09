@@ -101,15 +101,15 @@
                                 <!--                                </relocation>-->
 
                                 <!-- TODO plugin打包的时候，会发现类型不匹配-->
-                                <relocation>
-                                    <pattern>net.bytebuddy</pattern>
-                                    <shadedPattern>co.wangming.dragonfly.net.bytebuddy</shadedPattern>
-                                </relocation>
-                                <!-- TODO FIX -> reflections 依赖了javassist和slf4j, 在cp上有这俩个包, 排查影响范围 -->
                                 <!--                                <relocation>-->
-                                <!--                                    <pattern>org.reflections</pattern>-->
-                                <!--                                    <shadedPattern>co.wangming.dragonfly.org.reflections</shadedPattern>-->
+                                <!--                                    <pattern>net.bytebuddy</pattern>-->
+                                <!--                                    <shadedPattern>co.wangming.dragonfly.net.bytebuddy</shadedPattern>-->
                                 <!--                                </relocation>-->
+                                <!-- TODO FIX -> reflections 依赖了javassist和slf4j, 在cp上有这俩个包, 排查影响范围 -->
+                                <relocation>
+                                    <pattern>org.reflections</pattern>
+                                    <shadedPattern>co.wangming.dragonfly.org.reflections</shadedPattern>
+                                </relocation>
                                 <!-- TODO FIX -> zipkin2 依赖了okhttp3, 在cp上有这包, 排查影响范围 -->
                                 <relocation>
                                     <pattern>zipkin2</pattern>
