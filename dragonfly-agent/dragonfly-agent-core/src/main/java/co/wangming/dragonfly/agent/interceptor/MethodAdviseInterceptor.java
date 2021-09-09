@@ -49,7 +49,10 @@ public class MethodAdviseInterceptor {
                 LOGGER.error("{} 实例化异常", aClass.getName(), e);
                 break;
             } catch (IllegalAccessException e) {
-                LOGGER.error("{} 实例化异常", aClass.getName(), e);
+                LOGGER.error("{} 访问异常", aClass.getName(), e);
+                break;
+            } catch (Exception e) {
+                LOGGER.error("{} :{} 异常", aClass.getName(), aClass.getProtectionDomain().getCodeSource().getLocation(), e);
                 break;
             }
         }

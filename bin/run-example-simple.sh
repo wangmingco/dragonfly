@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 cd ..
-mvn clean install
+mvn clean
+mvn install
 
 cd ./dragonfly-agent
 

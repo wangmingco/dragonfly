@@ -17,7 +17,7 @@
 
         <dependency>
             <groupId>co.wangming</groupId>
-            <artifactId>dragonfly-agent</artifactId>
+            <artifactId>dragonfly-agent-core</artifactId>
             <version>${revision}</version>
         </dependency>
 
