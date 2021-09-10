@@ -22,8 +22,7 @@ public class MethodMatcher<T extends MethodDescription> implements ElementMatche
 
     @Override
     public <U extends T> MethodMatcher<U> or(ElementMatcher<? super U> other) {
-        Junction newMethodMatcher = methodMatcher.and(other);
-        methodMatcher = newMethodMatcher;
+        Junction newMethodMatcher = methodMatcher.or(other);
         return new MethodMatcher(newMethodMatcher, this.typeMatcher);
     }
 
