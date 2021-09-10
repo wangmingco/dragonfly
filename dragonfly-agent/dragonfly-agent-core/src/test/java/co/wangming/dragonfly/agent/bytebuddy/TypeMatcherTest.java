@@ -9,25 +9,13 @@ import static net.bytebuddy.matcher.ElementMatchers.*;
 public class TypeMatcherTest {
 
     @Test
-    public void testMatched() {
+    public void testAnd() {
 
         TypeMatcher<TypeDescription> matcher = TypeMatcher.of(named("java.lang.String"))
                 .and(not(nameStartsWith("sun.")));
 
-        TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(String.class);
-        boolean result = matcher.matches(forLoadedType);
-        Assert.assertEquals(true, result);
-    }
-
-    @Test
-    public void testNotMatch() {
-
-        TypeMatcher<TypeDescription> matcher = TypeMatcher.of(named("java.lang.Integer"))
-                .and(not(nameStartsWith("sun.")));
-
-        TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(String.class);
-        boolean result = matcher.matches(forLoadedType);
-        Assert.assertEquals(false, result);
+        Assert.assertEquals(true, matcher.matches(new TypeDescription.ForLoadedType(String.class)));
+        Assert.assertEquals(false, matcher.matches(new TypeDescription.ForLoadedType(String.class)));
     }
 
     @Test
@@ -36,9 +24,9 @@ public class TypeMatcherTest {
         TypeMatcher<TypeDescription> matcher = TypeMatcher.of(named("java.lang.Integer"))
                 .or(named("java.lang.String"));
 
-        TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(String.class);
-        boolean result = matcher.matches(forLoadedType);
-        Assert.assertEquals(true, result);
+        Assert.assertEquals(true, matcher.matches(new TypeDescription.ForLoadedType(String.class)));
+        Assert.assertEquals(true, matcher.matches(new TypeDescription.ForLoadedType(Integer.class)));
+        Assert.assertEquals(false, matcher.matches(new TypeDescription.ForLoadedType(Double.class)));
     }
 
 }
