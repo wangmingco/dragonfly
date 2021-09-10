@@ -1,5 +1,6 @@
 package co.wangming.dragonfly.lib.zipkin;
 
+import org.junit.Ignore;
 import zipkin2.Endpoint;
 import zipkin2.Span;
 import zipkin2.codec.SpanBytesEncoder;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+@Ignore
 public class ZipkinKafkaTest {
 
     public static Span buildSpan() {

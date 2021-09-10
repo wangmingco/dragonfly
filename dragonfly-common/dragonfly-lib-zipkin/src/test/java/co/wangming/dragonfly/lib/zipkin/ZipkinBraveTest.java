@@ -1,5 +1,6 @@
 package co.wangming.dragonfly.lib.zipkin;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import zipkin2.Endpoint;
 import zipkin2.Span;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+@Ignore
 public class ZipkinBraveTest {
 
     public static Span buildSpan() {
