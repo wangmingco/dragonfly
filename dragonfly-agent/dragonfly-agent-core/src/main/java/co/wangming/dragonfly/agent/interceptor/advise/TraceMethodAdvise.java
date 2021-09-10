@@ -12,6 +12,10 @@ public abstract class TraceMethodAdvise extends MatchableMethodAdvise {
 
     @Override
     public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments, AdviseContext adviseContext) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("进入 TraceMethodAdvise#beforeExec");
+        }
+
         ZipkinReporter.DEFAULE.sendCS("", "", "", null);
         return null;
     }
@@ -23,6 +27,9 @@ public abstract class TraceMethodAdvise extends MatchableMethodAdvise {
 
     @Override
     public Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments, AdviseContext adviseContext) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("进入 TraceMethodAdvise#afterExec");
+        }
         ZipkinReporter.DEFAULE.sendCR("", "", "", null);
         return null;
     }
