@@ -8,7 +8,7 @@ import static net.bytebuddy.matcher.ElementMatchers.named;
 public class CallableStatementTrace extends TraceMethodAdvise {
 
     @Override
-    protected TypeMatcher buildClassMatcher() {
+    protected TypeMatcher buildMatcher() {
         return TypeMatcher.of(named("com.mysql.jdbc.CallableStatement"));
     }
 }

@@ -12,10 +12,10 @@ public abstract class MatchableMethodAdvise implements MethodAdvise {
     private TypeMatcher matcher;
 
     public MatchableMethodAdvise() {
-        matcher = buildClassMatcher();
+        matcher = buildMatcher();
     }
 
-    protected abstract TypeMatcher buildClassMatcher();
+    protected abstract TypeMatcher buildMatcher();
 
     public boolean matches(Class clazz) {
         return matcher.matches(new TypeDescription.ForLoadedType(clazz));

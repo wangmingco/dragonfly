@@ -15,7 +15,7 @@ public class CatchExceptionMethodAdvise extends MatchableMethodAdvise {
     private static final Logger LOGGER = LoggerFactory.getLogger(CatchExceptionMethodAdvise.class);
 
     @Override
-    protected TypeMatcher buildClassMatcher() {
+    protected TypeMatcher buildMatcher() {
         return TypeMatcher.of(any());
     }
 
