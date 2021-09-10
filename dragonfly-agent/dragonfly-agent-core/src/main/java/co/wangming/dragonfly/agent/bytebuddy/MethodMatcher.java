@@ -46,6 +46,7 @@ public class MethodMatcher<T extends MethodDescription> implements ElementMatche
     }
 
     public TypeMatcher<TypeDescription> getTypeMatcher() {
+        typeMatcher.setMethodMatcher(this);
         return typeMatcher;
     }
 }

@@ -53,6 +53,10 @@ public class TypeMatcher<T extends TypeDescription> implements ElementMatcher.Ju
         return methodMatcher;
     }
 
+    public void setMethodMatcher(MethodMatcher methodMatcher) {
+        this.methodMatcher = methodMatcher;
+    }
+
     private boolean matches(MethodDescription target) {
         return this.methodMatcher.matches(target);
     }

@@ -56,7 +56,7 @@ public class MethodMatcherTest {
         Assert.assertEquals(true, matcher.matches(td, toBinaryStringMD));
 
         Method toUnsignedString = Integer.class.getMethod("toUnsignedString", int.class);
-        MethodDescription.ForLoadedMethod toUnsignedStringMD = new MethodDescription.ForLoadedMethod(toBinaryString);
+        MethodDescription.ForLoadedMethod toUnsignedStringMD = new MethodDescription.ForLoadedMethod(toUnsignedString);
         Assert.assertEquals(true, matcher.matches(td, toUnsignedStringMD));
     }
 }

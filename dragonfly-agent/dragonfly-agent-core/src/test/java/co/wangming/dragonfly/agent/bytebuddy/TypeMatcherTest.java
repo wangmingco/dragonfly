@@ -30,4 +30,15 @@ public class TypeMatcherTest {
         Assert.assertEquals(false, result);
     }
 
+    @Test
+    public void testOr() {
+
+        TypeMatcher<TypeDescription> matcher = TypeMatcher.of(named("java.lang.Integer"))
+                .or(named("java.lang.String"));
+
+        TypeDescription.ForLoadedType forLoadedType = new TypeDescription.ForLoadedType(String.class);
+        boolean result = matcher.matches(forLoadedType);
+        Assert.assertEquals(true, result);
+    }
+
 }
