@@ -30,6 +30,7 @@ public class MethodAdviseTransformerUnit implements TransformerUnit {
                 .and(not(nameStartsWith("sun.")))
                 .and(not(nameStartsWith("com.sun.")))
                 .and(not(nameStartsWith("jdk.")))
+                .and(not(nameStartsWith("com.mysql")))   // TODO
                 .transform(new MethodAdviseTransformer());
     }
 
