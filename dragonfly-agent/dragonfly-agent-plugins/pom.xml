@@ -16,7 +16,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>dragonfly-agent-plugin-brave</module>
         <module>dragonfly-agent-plugin-jdbc</module>
     </modules>
 
