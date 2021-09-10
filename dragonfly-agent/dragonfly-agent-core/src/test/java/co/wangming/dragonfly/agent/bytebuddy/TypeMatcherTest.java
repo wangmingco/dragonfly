@@ -15,7 +15,7 @@ public class TypeMatcherTest {
                 .and(not(nameStartsWith("sun.")));
 
         Assert.assertEquals(true, matcher.matches(new TypeDescription.ForLoadedType(String.class)));
-        Assert.assertEquals(false, matcher.matches(new TypeDescription.ForLoadedType(String.class)));
+        Assert.assertEquals(false, matcher.matches(new TypeDescription.ForLoadedType(Integer.class)));
     }
 
     @Test

@@ -21,6 +21,9 @@ public class CatchExceptionMethodAdvise extends MatchableMethodAdvise {
 
     @Override
     public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments, AdviseContext adviseContext) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("进入 CatchExceptionMethodAdvise beforeExec");
+        }
         return null;
     }
 
@@ -32,6 +35,9 @@ public class CatchExceptionMethodAdvise extends MatchableMethodAdvise {
 
     @Override
     public Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments, AdviseContext adviseContext) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("进入 CatchExceptionMethodAdvise afterExec");
+        }
         return null;
     }
 

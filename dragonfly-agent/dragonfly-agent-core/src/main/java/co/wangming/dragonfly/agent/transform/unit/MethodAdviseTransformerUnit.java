@@ -28,6 +28,7 @@ public class MethodAdviseTransformerUnit implements TransformerUnit {
                 .and(not(nameStartsWith("net.bytebuddy.")))
                 .and(not(nameStartsWith("java.")))
                 .and(not(nameStartsWith("sun.")))
+                .and(not(nameStartsWith("com.sun.")))
                 .and(not(nameStartsWith("jdk.")))
                 .transform(new MethodAdviseTransformer());
     }
