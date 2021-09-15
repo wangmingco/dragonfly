@@ -1,18 +1,18 @@
 package co.wangming.dragonfly.agent.plugin.jdbc.mysql.v5;
 
-import co.wangming.dragonfly.agent.transform.transformer.TraceTransformer;
+import co.wangming.dragonfly.agent.transform.Transform;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
 
 import static net.bytebuddy.matcher.ElementMatchers.named;
 
-//@Transform
-public class MysqlStatementImplTrace extends TraceTransformer {
+@Transform
+public class MysqlStatementImplTrace extends MysqlV5TraceTransformer {
 
     @Override
     public ElementMatcher.Junction<TypeDescription> typeConstraints() {
-        return named("com.mysql.jdbc.StatementImpl");
+        return named(packageName() + "StatementImpl");
     }
 
     @Override

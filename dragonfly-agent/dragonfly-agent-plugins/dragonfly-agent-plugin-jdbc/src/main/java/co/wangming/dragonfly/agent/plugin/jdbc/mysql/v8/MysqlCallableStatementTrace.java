@@ -1,4 +1,4 @@
-package co.wangming.dragonfly.agent.plugin.jdbc.mysql.v5;
+package co.wangming.dragonfly.agent.plugin.jdbc.mysql.v8;
 
 import co.wangming.dragonfly.agent.transform.Transform;
 import net.bytebuddy.description.method.MethodDescription;
@@ -8,7 +8,7 @@ import net.bytebuddy.matcher.ElementMatcher;
 import static net.bytebuddy.matcher.ElementMatchers.named;
 
 @Transform
-public class MysqlCallableStatementTrace extends MysqlV5TraceTransformer {
+public class MysqlCallableStatementTrace extends MysqlV8TraceTransformer {
 
     @Override
     public ElementMatcher.Junction<TypeDescription> typeConstraints() {

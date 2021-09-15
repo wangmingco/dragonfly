@@ -1,5 +1,6 @@
 package co.wangming.dragonfly.agent.plugin.jdbc.mysql;
 
+import co.wangming.dragonfly.agent.transform.Transform;
 import co.wangming.dragonfly.agent.transform.transformer.TraceTransformer;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
@@ -10,7 +11,7 @@ import java.sql.PreparedStatement;
 import static net.bytebuddy.matcher.ElementMatchers.isSubTypeOf;
 import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
 
-//@Transform
+@Transform
 public class JavaPreparedStatementTrace extends TraceTransformer {
 
     @Override

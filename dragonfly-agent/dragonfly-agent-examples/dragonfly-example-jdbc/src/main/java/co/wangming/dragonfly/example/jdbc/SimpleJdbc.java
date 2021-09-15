@@ -21,6 +21,7 @@ public class SimpleJdbc {
     }
 
     public static void main(String[] args) {
+        System.out.println("JDBC Demo开始运行");
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();) {

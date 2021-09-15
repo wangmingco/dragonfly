@@ -18,7 +18,7 @@ public class CatchExceptionMethodAdvise extends AbstractMethodAdvise {
     @Override
     public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("进入 CatchExceptionMethodAdvise beforeExec");
+            LOGGER.debug("beforeExec: {}#{}", clazz.getName(), method.getName());
         }
         return null;
     }
@@ -32,7 +32,7 @@ public class CatchExceptionMethodAdvise extends AbstractMethodAdvise {
     @Override
     public Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("进入 CatchExceptionMethodAdvise afterExec");
+            LOGGER.debug("afterExec: {}#{}", clazz.getName(), method.getName());
         }
         return null;
     }

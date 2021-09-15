@@ -1,7 +1,6 @@
 package co.wangming.dragonfly.lib.zipkin;
 
 import zipkin2.Span;
-import zipkin2.codec.SpanBytesEncoder;
 import zipkin2.reporter.AsyncReporter;
 import zipkin2.reporter.Sender;
 import zipkin2.reporter.kafka.KafkaSender;
@@ -52,7 +51,7 @@ public enum ZipkinReporter {
     }
 
     private void send(Span span) {
-        asyncReporter.report(SpanBytesEncoder.JSON_V2.encode(span));
+//        asyncReporter.report(SpanBytesEncoder.JSON_V2.encode(span));
     }
 
     private Span buildSpan(String type, String traceId, String parentTraceId, String name, Map data) {
