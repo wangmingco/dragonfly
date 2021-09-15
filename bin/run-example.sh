@@ -3,10 +3,12 @@
 EXAMPLE_PROJECT=$1
 EXAMPLE_JAR=$2
 EXAMPLE_CLASS_NAME=$3
+EXAMPLE_JVM_PARAM=$4
 
 echo "EXAMPLE_PROJECT: ${EXAMPLE_PROJECT}"
 echo "EXAMPLE_JAR: ${EXAMPLE_JAR}"
 echo "EXAMPLE_CLASS_NAME: ${EXAMPLE_CLASS_NAME}"
+echo "EXAMPLE_JVM_PARAM: ${EXAMPLE_JVM_PARAM}"
 
 cd ..
 mvn clean
@@ -20,7 +22,7 @@ cp ./dragonfly-agent-jar/target/dragonfly-agent-jar-0.1.jar ./dragonfly-agent-ex
 cd ./dragonfly-agent-examples/${EXAMPLE_PROJECT}/target
 
 if [ -z "${EXAMPLE_CLASS_NAME}" ]; then
-  java -javaagent:./dragonfly-agent-jar-0.1.jar -jar ./${EXAMPLE_JAR}
+  java -javaagent:./dragonfly-agent-jar-0.1.jar ${EXAMPLE_JVM_PARAM} -jar ./${EXAMPLE_JAR}
 else
-  java -javaagent:./dragonfly-agent-jar-0.1.jar -cp ./${EXAMPLE_JAR} ${EXAMPLE_CLASS_NAME}
+  java -javaagent:./dragonfly-agent-jar-0.1.jar ${EXAMPLE_JVM_PARAM} -cp ./${EXAMPLE_JAR} ${EXAMPLE_CLASS_NAME}
 fi

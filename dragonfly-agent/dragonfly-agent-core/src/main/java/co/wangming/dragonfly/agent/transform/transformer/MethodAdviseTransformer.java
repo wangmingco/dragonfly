@@ -16,7 +16,8 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
-import static net.bytebuddy.matcher.ElementMatchers.*;
+import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
+import static net.bytebuddy.matcher.ElementMatchers.not;
 
 public abstract class MethodAdviseTransformer implements Transformer {
 
@@ -27,7 +28,7 @@ public abstract class MethodAdviseTransformer implements Transformer {
         ElementMatcher.Junction<TypeDescription> typeMatcher = typeConstraints();
 
         return builder
-                .type(any())
+                .type(typeMatcher)
                 .and(not(nameStartsWith(Constant.getPackageName())))
                 .and(not(nameStartsWith("java.")))
                 .and(not(nameStartsWith("sun.")))
