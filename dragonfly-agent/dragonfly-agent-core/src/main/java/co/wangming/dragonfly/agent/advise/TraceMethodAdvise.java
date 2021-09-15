@@ -1,8 +1,6 @@
 package co.wangming.dragonfly.agent.advise;
 
 import co.wangming.dragonfly.lib.zipkin.ZipkinReporter;
-import net.bytebuddy.description.method.MethodDescription;
-import net.bytebuddy.matcher.ElementMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +10,8 @@ public class TraceMethodAdvise extends AbstractMethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TraceMethodAdvise.class);
 
-    public TraceMethodAdvise(ElementMatcher.Junction<MethodDescription> matcher) {
-        super(matcher);
+    public TraceMethodAdvise() {
+        super();
     }
 
     @Override

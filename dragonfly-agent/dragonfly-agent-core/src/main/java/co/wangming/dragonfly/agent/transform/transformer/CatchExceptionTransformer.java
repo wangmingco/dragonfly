@@ -33,8 +33,8 @@ public class CatchExceptionTransformer extends MethodAdviseTransformer {
     }
 
     @Override
-    public AbstractMethodAdvise advise(ElementMatcher.Junction<MethodDescription> matcher) {
-        return new CatchExceptionMethodAdvise(matcher);
+    public AbstractMethodAdvise advise() {
+        return new CatchExceptionMethodAdvise();
     }
 
 

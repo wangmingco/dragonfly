@@ -13,8 +13,7 @@ public abstract class MatchableMethodAdvise implements MethodAdvise {
 
     private ElementMatcher.Junction<MethodDescription> methodMatcher;
 
-    public MatchableMethodAdvise(ElementMatcher.Junction<MethodDescription> matcher) {
-        methodMatcher = matcher;
+    public MatchableMethodAdvise() {
     }
 
     public boolean matches(Method method) {

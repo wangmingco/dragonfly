@@ -1,7 +1,5 @@
 package co.wangming.dragonfly.agent.advise;
 
-import net.bytebuddy.description.method.MethodDescription;
-import net.bytebuddy.matcher.ElementMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,8 +9,7 @@ public class CatchExceptionMethodAdvise extends AbstractMethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CatchExceptionMethodAdvise.class);
 
-    public CatchExceptionMethodAdvise(ElementMatcher.Junction<MethodDescription> matcher) {
-        super(matcher);
+    public CatchExceptionMethodAdvise() {
     }
 
     @Override

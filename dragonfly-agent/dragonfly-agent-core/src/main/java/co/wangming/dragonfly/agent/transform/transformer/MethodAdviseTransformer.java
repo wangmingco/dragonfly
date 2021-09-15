@@ -27,7 +27,7 @@ public abstract class MethodAdviseTransformer implements Transformer {
         ElementMatcher.Junction<TypeDescription> typeMatcher = typeConstraints();
 
         return builder
-                .type(typeMatcher)
+                .type(any())
                 .and(not(nameStartsWith(Constant.getPackageName())))
                 .and(not(nameStartsWith("java.")))
                 .and(not(nameStartsWith("sun.")))
@@ -47,8 +47,7 @@ public abstract class MethodAdviseTransformer implements Transformer {
 
             try {
                 ElementMatcher.Junction<MethodDescription> matcher = methodConstraints();
-
-                return builder.method(any()).intercept(MethodDelegation.withDefaultConfiguration().to(new MethodAdviseInterceptor(matcher)));
+                return builder.method(matcher).intercept(MethodDelegation.withDefaultConfiguration().to(new MethodAdviseInterceptor()));
             } catch (Exception e) {
                 LOGGER.error("添加代理方法异常", e);
                 // TODO
@@ -60,12 +59,6 @@ public abstract class MethodAdviseTransformer implements Transformer {
 
     public class MethodAdviseInterceptor {
 
-        private ElementMatcher.Junction<MethodDescription> matcher;
-
-        public MethodAdviseInterceptor(ElementMatcher.Junction<MethodDescription> matcher) {
-            this.matcher = matcher;
-        }
-
         @RuntimeType
         public Object intercept(@Origin Class clazz, @Origin Method method, @This Object thisObj, @AllArguments Object[] allArguments, @SuperCall Callable callable) throws Exception {
 
@@ -73,7 +66,7 @@ public abstract class MethodAdviseTransformer implements Transformer {
                 LOGGER.debug("{}#{} 开始执行intercept", clazz.getName(), method.getName());
             }
 
-            AbstractMethodAdvise advise = advise(matcher);
+            AbstractMethodAdvise advise = advise();
 
             Object result = advise.intercept(clazz, method, thisObj, allArguments, callable);
 
@@ -85,5 +78,5 @@ public abstract class MethodAdviseTransformer implements Transformer {
 
     public abstract ElementMatcher.Junction<MethodDescription> methodConstraints();
 
-    public abstract AbstractMethodAdvise advise(ElementMatcher.Junction<MethodDescription> matcher);
+    public abstract AbstractMethodAdvise advise();
 }
