@@ -14,7 +14,9 @@ public class DragonflyAgent {
 
     public static void premain(String arguments, Instrumentation instrumentation) throws Exception {
 
-        LOGGER.debug("Dragonfly 启动");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Dragonfly 启动");
+        }
 
         AgentBuilder.Default builder = new AgentBuilder.Default();
 
@@ -23,6 +25,8 @@ public class DragonflyAgent {
 
         agentBuilder.installOn(instrumentation);
 
-        LOGGER.debug("Dragonfly 构建完成");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Dragonfly 构建完成");
+        }
     }
 }

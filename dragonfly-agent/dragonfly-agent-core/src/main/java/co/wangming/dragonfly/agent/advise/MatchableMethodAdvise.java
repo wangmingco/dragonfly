@@ -17,8 +17,8 @@ public abstract class MatchableMethodAdvise implements MethodAdvise {
         methodMatcher = matcher;
     }
 
-    public boolean matches(Method clazz) {
-        return methodMatcher.matches(new MethodDescription.ForLoadedMethod(clazz));
+    public boolean matches(Method method) {
+        return methodMatcher.matches(new MethodDescription.ForLoadedMethod(method));
 
     }
 

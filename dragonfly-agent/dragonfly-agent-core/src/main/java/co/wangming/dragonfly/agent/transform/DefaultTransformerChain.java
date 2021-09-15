@@ -18,7 +18,9 @@ public class DefaultTransformerChain extends TransformerChain {
         Set<Class<?>> subTypes = ClassUtil.getTypesAnnotatedWith(Transform.class);
 
         String names = subTypes.stream().map(it -> it.getName()).collect(Collectors.joining(","));
-        LOGGER.debug("找到 TransformComponent 列表:{}", names);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("找到 TransformComponent 列表:{}", names);
+        }
 
         for (Class subType : subTypes) {
             Transformer instance = (Transformer) subType.newInstance();
