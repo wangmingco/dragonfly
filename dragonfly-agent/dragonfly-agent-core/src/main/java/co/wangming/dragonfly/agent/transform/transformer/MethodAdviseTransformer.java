@@ -60,6 +60,12 @@ public abstract class MethodAdviseTransformer implements Transformer {
 
     public class MethodAdviseInterceptor {
 
+        MethodAdviseInterceptor() {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("实例化");
+            }
+        }
+
         @RuntimeType
         public Object intercept(@Origin Class clazz, @Origin Method method, @This Object thisObj, @AllArguments Object[] allArguments, @SuperCall Callable callable) throws Exception {
 

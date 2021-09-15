@@ -9,7 +9,10 @@ public class CatchExceptionMethodAdvise extends AbstractMethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CatchExceptionMethodAdvise.class);
 
-    public CatchExceptionMethodAdvise() {
+    private static CatchExceptionMethodAdvise advise = new CatchExceptionMethodAdvise();
+
+    public static CatchExceptionMethodAdvise INSANCE() {
+        return advise;
     }
 
     @Override

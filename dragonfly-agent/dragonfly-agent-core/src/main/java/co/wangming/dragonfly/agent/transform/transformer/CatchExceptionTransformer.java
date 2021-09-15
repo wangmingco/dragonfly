@@ -34,7 +34,7 @@ public class CatchExceptionTransformer extends MethodAdviseTransformer {
 
     @Override
     public AbstractMethodAdvise advise() {
-        return new CatchExceptionMethodAdvise();
+        return CatchExceptionMethodAdvise.INSANCE();
     }
 
 
