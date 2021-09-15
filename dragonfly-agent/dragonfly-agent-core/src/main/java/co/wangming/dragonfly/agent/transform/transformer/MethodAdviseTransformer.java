@@ -29,11 +29,11 @@ public abstract class MethodAdviseTransformer implements Transformer {
         return builder
                 .type(typeMatcher)
                 .and(not(nameStartsWith(Constant.getPackageName())))
-                .and(not(nameStartsWith("net.bytebuddy.")))
                 .and(not(nameStartsWith("java.")))
                 .and(not(nameStartsWith("sun.")))
-                .and(not(nameStartsWith("com.sun.")))
                 .and(not(nameStartsWith("jdk.")))
+                .and(not(nameStartsWith("com.sun.")))
+                .and(not(nameStartsWith("net.bytebuddy.")))
                 .transform(new AgentTransformer());
     }
 
