@@ -1,6 +1,6 @@
 package co.wangming.dragonfly.agent.transform;
 
-import co.wangming.dragonfly.agent.transform.unit.TransformerUnit;
+import co.wangming.dragonfly.agent.transform.transformer.Transformer;
 import co.wangming.dragonfly.agent.util.ClassUtil;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
@@ -15,13 +15,13 @@ public class DefaultTransformerChain extends TransformerChain {
 
     @Override
     public void build() throws InstantiationException, IllegalAccessException {
-        Set<Class<?>> subTypes = ClassUtil.getTypesAnnotatedWith(TransformerComponent.class);
+        Set<Class<?>> subTypes = ClassUtil.getTypesAnnotatedWith(Transform.class);
 
         String names = subTypes.stream().map(it -> it.getName()).collect(Collectors.joining(","));
         LOGGER.debug("找到 TransformComponent 列表:{}", names);
 
         for (Class subType : subTypes) {
-            TransformerUnit instance = (TransformerUnit) subType.newInstance();
+            Transformer instance = (Transformer) subType.newInstance();
             chain.add(instance);
         }
 
@@ -31,8 +31,8 @@ public class DefaultTransformerChain extends TransformerChain {
     public AgentBuilder invoke(AgentBuilder.Default builder) {
 
         AgentBuilder agentBuilder = builder;
-        for (TransformerUnit transformerUnit : chain) {
-            AgentBuilder wrapperBuilder = transformerUnit.addTransform(agentBuilder);
+        for (Transformer transformer : chain) {
+            AgentBuilder wrapperBuilder = transformer.addTransform(agentBuilder);
             if (wrapperBuilder != null) {
                 agentBuilder = wrapperBuilder;
             }

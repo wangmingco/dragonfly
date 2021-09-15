@@ -1,17 +1,23 @@
-package co.wangming.dragonfly.agent.interceptor.advise;
+package co.wangming.dragonfly.agent.advise;
 
 import co.wangming.dragonfly.lib.zipkin.ZipkinReporter;
+import net.bytebuddy.description.method.MethodDescription;
+import net.bytebuddy.matcher.ElementMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 
-public abstract class TraceMethodAdvise extends MatchableMethodAdvise {
+public class TraceMethodAdvise extends AbstractMethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TraceMethodAdvise.class);
 
+    public TraceMethodAdvise(ElementMatcher.Junction<MethodDescription> matcher) {
+        super(matcher);
+    }
+
     @Override
-    public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments, AdviseContext adviseContext) {
+    public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("进入 TraceMethodAdvise#beforeExec");
         }
@@ -21,12 +27,12 @@ public abstract class TraceMethodAdvise extends MatchableMethodAdvise {
     }
 
     @Override
-    public Object exceptionOnExec(Class clazz, Method method, Object thisObj, Object[] allArguments, AdviseContext adviseContext) {
+    public Object exceptionOnExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
         return null;
     }
 
     @Override
-    public Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments, AdviseContext adviseContext) {
+    public Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("进入 TraceMethodAdvise#afterExec");
         }

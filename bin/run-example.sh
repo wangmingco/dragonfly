@@ -10,6 +10,7 @@ echo "EXAMPLE_CLASS_NAME: ${EXAMPLE_CLASS_NAME}"
 
 cd ..
 mvn clean
+mvn dependency:purge-local-repository -DreResolve=false -DmanualInclude="co.wangming"
 mvn install
 
 cd ./dragonfly-agent
