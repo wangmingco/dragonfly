@@ -6,24 +6,14 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
-public abstract class AbstractMethodAdvise extends MatchableMethodAdvise {
+public abstract class AbstractMethodAdvise implements MethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMethodAdvise.class);
-
-    public AbstractMethodAdvise() {
-    }
 
     public Object intercept(Class clazz, Method method, Object thisObj, Object[] allArguments, Callable callable) throws Exception {
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("{}#{} 开始执行intercept", clazz.getName(), method.getName());
-        }
-
-        if (matches(method)) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("{}#{} 不匹配直接执行原始方法", clazz.getName(), method.getName());
-            }
-            return callable.call();
         }
 
         try {
