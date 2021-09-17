@@ -13,13 +13,13 @@ public abstract class AbstractMethodAdvise implements MethodAdvise {
     public Object intercept(Class clazz, Method method, Object thisObj, Object[] allArguments, Callable callable) throws Exception {
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("{}#{} 开始执行intercept", clazz.getName(), method.getName());
+            LOGGER.debug("[方法增强] 开始: {}#{} ", clazz.getName(), method.getName());
         }
 
         try {
             beforeExec(clazz, method, thisObj, allArguments);
         } catch (Exception e) {
-            LOGGER.error("方法增强 {} beforeExec 发生异常", toString(), e);
+            LOGGER.error("[方法增强] beforeExec {}#{} 发生异常", clazz.getName(), method.getName(), e);
         }
 
         try {
@@ -28,18 +28,18 @@ public abstract class AbstractMethodAdvise implements MethodAdvise {
             try {
                 exceptionOnExec(clazz, method, thisObj, allArguments);
             } catch (Exception e1) {
-                LOGGER.error("方法增强 {} exceptionOnExec 发生异常", toString(), e);
+                LOGGER.error("[方法增强] {}#{} exceptionOnExec 发生异常", clazz.getName(), method.getName(), e);
             }
             throw e;
         } finally {
             try {
                 afterExec(clazz, method, thisObj, allArguments);
             } catch (Exception e1) {
-                LOGGER.error("方法增强 {} afterExec 发生异常", toString(), e1);
+                LOGGER.error("[方法增强] afterExec {}#{} 发生异常", clazz.getName(), method.getName(), e1);
             }
 
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("{}#{} intercept执行完成", clazz.getName(), method.getName());
+                LOGGER.debug("[方法增强] 完成: {}#{}", clazz.getName(), method.getName());
             }
         }
 
