@@ -16,6 +16,11 @@ public class TraceMethodAdvise extends AbstractMethodAdvise {
     }
 
     @Override
+    public String name() {
+        return "TraceMethodAdvise";
+    }
+
+    @Override
     public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("beforeExec: {}#{}", clazz.getName(), method.getName());

@@ -1,6 +1,7 @@
 package co.wangming.dragonfly.agent.transform.transformer;
 
 import co.wangming.dragonfly.agent.advise.AbstractMethodAdvise;
+import co.wangming.dragonfly.agent.util.Constant;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
@@ -15,6 +16,9 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
+import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
+import static net.bytebuddy.matcher.ElementMatchers.not;
+
 public abstract class MethodAdviseTransformer implements Transformer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodAdviseTransformer.class);
@@ -24,6 +28,14 @@ public abstract class MethodAdviseTransformer implements Transformer {
         ElementMatcher.Junction<TypeDescription> typeMatcher = typeConstraints();
         return builder
                 .type(typeMatcher)
+                .and(not(nameStartsWith(Constant.getPackageName())))
+                .and(not(nameStartsWith("java.")))
+                .and(not(nameStartsWith("sun.")))
+                .and(not(nameStartsWith("jdk.")))
+                .and(not(nameStartsWith("com.sun.")))
+                .and(not(nameStartsWith("net.bytebuddy.")))
+                .and(not(nameStartsWith("com.intellij.")))
+                .and(not(nameStartsWith("org.jetbrains.")))
                 .transform(new AgentTransformer())
                 .asTerminalTransformation();
     }
@@ -32,13 +44,15 @@ public abstract class MethodAdviseTransformer implements Transformer {
 
         @Override
         public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("构建方法代理: {}", typeDescription.getName());
-            }
 
             try {
                 ElementMatcher.Junction<MethodDescription> methodMatcher = methodConstraints();
                 AbstractMethodAdvise advise = advise();
+
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("构建方法代理: [{} - {}]", advise.name(), typeDescription.getName());
+                }
+
                 return builder
                         .method(methodMatcher)
                         .intercept(MethodDelegation
@@ -68,6 +82,10 @@ public abstract class MethodAdviseTransformer implements Transformer {
                                 @This Object thisObj,
                                 @AllArguments Object[] allArguments,
                                 @SuperCall Callable callable) throws Exception {
+
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("进入Interceptor: [{}] 目标:{}#{}", advise.name(), clazz.getName(), method.getName());
+            }
 
             Object result = advise.intercept(clazz, method, thisObj, allArguments, callable);
 
