@@ -1,25 +1,27 @@
 name: Sync Gitee Repos To Github
 
+# 设置定时执行和手动触发
 on:
   schedule:
-    - cron: '*/10 * * * *'
-    branches:
-      - master
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-20.04
+  run:
+    name: Sync Gitee to GitHub
+    runs-on: ubuntu-latest
     steps:
-      - name: Sync Gitee Repos To Github
-        uses: Yikun/hub-mirror-action@v1.0
+
+      - name: Sync Gite To Github
+        uses: Yikun/hub-mirror-action@v1.1
         with:
           src: gitee/wangmingco
           dst: github/wangmingco
-          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
-          dst_token: ${{ secrets.GITEE_TOKEN }}
-          account_type: user
-          clone_style: "ssh"
+          dst_key: ${{ secrets.DRAGONFLY_SECRET_KEY }}
+          dst_token: ${{ secrets.dragonfly_token }}
+          static_list: 'dragonfly'
+          clone_style: "https"
           debug: true
+          account_type: user
           force_update: true
-          static_list: "dragonfly"
-          timeout: '600s'
+          timeout: 300
