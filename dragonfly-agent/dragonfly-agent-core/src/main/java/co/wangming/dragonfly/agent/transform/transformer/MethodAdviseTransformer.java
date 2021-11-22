@@ -25,10 +25,13 @@ public abstract class MethodAdviseTransformer implements Transformer {
 
     public AgentBuilder addTransform(AgentBuilder builder) {
 
-        ElementMatcher.Junction<TypeDescription> typeMatcher = typeConstraints();
+        final AbstractMethodAdvise advise = advise();
+        final ElementMatcher.Junction<TypeDescription> typeMatcher = typeConstraints();
+        final ElementMatcher.Junction<MethodDescription> methodMatcher = methodConstraints();
+
         return builder
                 .type(typeMatcher)
-                .and(not(nameStartsWith(Constant.getPackageName())))
+                .and(not(nameStartsWith(Constant.dragonflyPackageName())))
                 .and(not(nameStartsWith("java.")))
                 .and(not(nameStartsWith("sun.")))
                 .and(not(nameStartsWith("jdk.")))
@@ -36,19 +39,24 @@ public abstract class MethodAdviseTransformer implements Transformer {
                 .and(not(nameStartsWith("net.bytebuddy.")))
                 .and(not(nameStartsWith("com.intellij.")))
                 .and(not(nameStartsWith("org.jetbrains.")))
-                .transform(new AgentTransformer())
+                .transform(new AgentTransformer(advise, methodMatcher))
                 .asTerminalTransformation();
     }
 
-    public class AgentTransformer implements AgentBuilder.Transformer {
+    public static class AgentTransformer implements AgentBuilder.Transformer {
+
+        private AbstractMethodAdvise advise;
+        private ElementMatcher.Junction<MethodDescription> methodMatcher;
+
+        AgentTransformer(AbstractMethodAdvise advise, ElementMatcher.Junction<MethodDescription> methodMatcher) {
+            this.advise = advise;
+            this.methodMatcher = methodMatcher;
+        }
 
         @Override
         public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
 
             try {
-                ElementMatcher.Junction<MethodDescription> methodMatcher = methodConstraints();
-                AbstractMethodAdvise advise = advise();
-
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("构建方法代理: [{} - {}]", advise.name(), typeDescription.getName());
                 }
@@ -70,7 +78,7 @@ public abstract class MethodAdviseTransformer implements Transformer {
 
     public static class MethodAdviseInterceptor {
 
-        AbstractMethodAdvise advise;
+        private AbstractMethodAdvise advise;
 
         MethodAdviseInterceptor(AbstractMethodAdvise advise) {
             this.advise = advise;

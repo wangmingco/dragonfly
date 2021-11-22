@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 
-public class TraceMethodAdvise extends AbstractMethodAdvise {
+public class TraceMethodAdvise extends CatchExceptionMethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TraceMethodAdvise.class);
 
@@ -33,11 +33,6 @@ public class TraceMethodAdvise extends AbstractMethodAdvise {
         } catch (Exception e) {
             LOGGER.error("", e);
         }
-        return null;
-    }
-
-    @Override
-    public Object exceptionOnExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
         return null;
     }
 

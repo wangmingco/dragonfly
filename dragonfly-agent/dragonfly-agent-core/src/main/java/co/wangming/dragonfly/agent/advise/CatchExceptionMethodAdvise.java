@@ -5,15 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 
-public class CatchExceptionMethodAdvise extends AbstractMethodAdvise {
+public abstract class CatchExceptionMethodAdvise extends AbstractMethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CatchExceptionMethodAdvise.class);
-
-    private static CatchExceptionMethodAdvise advise = new CatchExceptionMethodAdvise();
-
-    public static CatchExceptionMethodAdvise INSANCE() {
-        return advise;
-    }
 
     @Override
     public String name() {
@@ -21,24 +15,9 @@ public class CatchExceptionMethodAdvise extends AbstractMethodAdvise {
     }
 
     @Override
-    public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("beforeExec: {}#{}", clazz.getName(), method.getName());
-        }
-        return null;
-    }
-
-    @Override
-    public Object exceptionOnExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
+    public Object exceptionOnExec(Class clazz, Method method, Object thisObj, Object[] allArguments, Throwable e) {
         // TODO 异常捕获后发送到服务器
-        return null;
-    }
-
-    @Override
-    public Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("afterExec: {}#{}", clazz.getName(), method.getName());
-        }
+        LOGGER.error("捕获到异常:{}", e);
         return null;
     }
 

@@ -11,9 +11,6 @@ public abstract class TraceTransformer extends MethodAdviseTransformer {
 
     @Override
     public AbstractMethodAdvise advise() {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("从TraceTransformer中构建Advise");
-        }
         return new TraceMethodAdvise();
     }
 

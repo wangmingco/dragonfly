@@ -13,14 +13,16 @@ public class SimpleJdbc {
     private static final String PASS = "root";
 
     static {
+
+    }
+
+    public static void main(String[] args) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
 
-    public static void main(String[] args) {
         System.out.println("JDBC Demo开始运行");
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);

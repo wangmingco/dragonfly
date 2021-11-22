@@ -24,9 +24,9 @@ public abstract class AbstractMethodAdvise implements MethodAdvise {
 
         try {
             return callable.call();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             try {
-                exceptionOnExec(clazz, method, thisObj, allArguments);
+                exceptionOnExec(clazz, method, thisObj, allArguments, e);
             } catch (Exception e1) {
                 LOGGER.error("[方法增强] {}#{} exceptionOnExec 发生异常", clazz.getName(), method.getName(), e);
             }
