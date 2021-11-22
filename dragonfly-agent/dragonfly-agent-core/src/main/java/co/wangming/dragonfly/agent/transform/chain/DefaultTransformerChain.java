@@ -1,5 +1,7 @@
-package co.wangming.dragonfly.agent.transform;
+package co.wangming.dragonfly.agent.transform.chain;
 
+import co.wangming.dragonfly.agent.transform.transformer.DefaultTransformer;
+import co.wangming.dragonfly.agent.transform.transformer.Transform;
 import co.wangming.dragonfly.agent.transform.transformer.Transformer;
 import co.wangming.dragonfly.agent.util.ClassUtil;
 import co.wangming.dragonfly.agent.util.Constant;
@@ -19,18 +21,17 @@ public class DefaultTransformerChain extends TransformerChain {
     @Override
     public void build() throws InstantiationException, IllegalAccessException {
         Set<Class<?>> subTypes = ClassUtil.getTypesAnnotatedWith(Transform.class);
-//        subTypes.add(DefaultTransformer.class);
+        subTypes.add(DefaultTransformer.class);
 
         if (LOGGER.isDebugEnabled()) {
             String names = subTypes.stream().map(it -> it.getName()).collect(Collectors.joining("\n    "));
-            LOGGER.debug("找到 TransformComponent 列表:\n[\n    {}\n]", names);
+            LOGGER.debug("[TransformerChain] 找到 TransformComponent 列表:\n[\n    {}\n]", names);
         }
 
         for (Class subType : subTypes) {
             Transformer instance = (Transformer) subType.newInstance();
             chain.add(instance);
         }
-
     }
 
     @Override
@@ -48,13 +49,13 @@ public class DefaultTransformerChain extends TransformerChain {
 
         for (Transformer transformer : chain) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("构建Transformer: {}", transformer.getClass().getName());
+                LOGGER.debug("[TransformerChain] 构建Transformer: {}", transformer.getClass().getName());
             }
             AgentBuilder wrapperBuilder = transformer.addTransform(agentBuilder);
             if (wrapperBuilder != null) {
                 agentBuilder = wrapperBuilder;
             } else {
-                LOGGER.error("返回的AgentBuilder为空");
+                LOGGER.error("[TransformerChain] 返回的AgentBuilder为空");
             }
         }
 

@@ -1,7 +1,6 @@
 package co.wangming.dragonfly.agent;
 
-import co.wangming.dragonfly.agent.transform.TransformerChain;
-import co.wangming.dragonfly.agent.transform.TransformerChainFactory;
+import co.wangming.dragonfly.agent.transform.chain.TransformerChainFactory;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +19,7 @@ public class DragonflyAgent {
 
         AgentBuilder.Default builder = new AgentBuilder.Default();
 
-        TransformerChain chain = TransformerChainFactory.buildDefault();
-        AgentBuilder agentBuilder = chain.invoke(builder);
+        AgentBuilder agentBuilder = TransformerChainFactory.buildDefault(builder);
 
         agentBuilder.installOn(instrumentation);
 
