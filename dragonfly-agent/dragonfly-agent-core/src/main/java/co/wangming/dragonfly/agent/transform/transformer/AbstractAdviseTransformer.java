@@ -16,9 +16,9 @@ import org.slf4j.LoggerFactory;
 import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
 import static net.bytebuddy.matcher.ElementMatchers.not;
 
-public abstract class MethodAdviseTransformer implements Transformer {
+public abstract class AbstractAdviseTransformer implements Transformer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MethodAdviseTransformer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAdviseTransformer.class);
 
     @Override
     public AgentBuilder addTransform(AgentBuilder builder) {
