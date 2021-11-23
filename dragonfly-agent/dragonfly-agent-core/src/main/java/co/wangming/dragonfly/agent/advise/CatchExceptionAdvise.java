@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 
-public abstract class CatchExceptionMethodAdvise extends AbstractMethodAdvise {
+public abstract class CatchExceptionAdvise extends AbstractMethodAdvise {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CatchExceptionMethodAdvise.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CatchExceptionAdvise.class);
 
     @Override
     public Object exceptionOnExec(Class clazz, Method method, Object thisObj, Object[] allArguments, Throwable e) {
