@@ -1,6 +1,6 @@
 package co.wangming.dragonfly.agent.transform.interceptor;
 
-import co.wangming.dragonfly.agent.advise.AbstractMethodAdvise;
+import co.wangming.dragonfly.agent.advise.MethodAdvise;
 import net.bytebuddy.implementation.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,9 +12,9 @@ public class MethodAdviseInterceptor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodAdviseInterceptor.class);
 
-    private AbstractMethodAdvise advise;
+    private MethodAdvise advise;
 
-    public MethodAdviseInterceptor(AbstractMethodAdvise advise) {
+    public MethodAdviseInterceptor(MethodAdvise advise) {
         this.advise = advise;
     }
 

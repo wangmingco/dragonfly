@@ -1,6 +1,6 @@
 package co.wangming.dragonfly.agent.transform.transformer;
 
-import co.wangming.dragonfly.agent.advise.AbstractMethodAdvise;
+import co.wangming.dragonfly.agent.advise.MethodAdvise;
 import co.wangming.dragonfly.agent.transform.interceptor.MethodAdviseInterceptor;
 import co.wangming.dragonfly.agent.util.Constant;
 import net.bytebuddy.agent.builder.AgentBuilder;
@@ -23,7 +23,7 @@ public abstract class AbstractAdviseTransformer implements Transformer {
     @Override
     public AgentBuilder addTransform(AgentBuilder builder) {
 
-        final AbstractMethodAdvise advise = advise();
+        final MethodAdvise advise = advise();
         final ElementMatcher.Junction<TypeDescription> typeMatcher = typeConstraints();
         final ElementMatcher.Junction<MethodDescription> methodMatcher = methodConstraints();
 
@@ -39,10 +39,10 @@ public abstract class AbstractAdviseTransformer implements Transformer {
 
     public static class AgentTransformer implements AgentBuilder.Transformer {
 
-        private AbstractMethodAdvise advise;
+        private MethodAdvise advise;
         private ElementMatcher.Junction<MethodDescription> methodMatcher;
 
-        AgentTransformer(AbstractMethodAdvise advise, ElementMatcher.Junction<MethodDescription> methodMatcher) {
+        AgentTransformer(MethodAdvise advise, ElementMatcher.Junction<MethodDescription> methodMatcher) {
             this.advise = advise;
             this.methodMatcher = methodMatcher;
         }
@@ -70,5 +70,5 @@ public abstract class AbstractAdviseTransformer implements Transformer {
 
     public abstract ElementMatcher.Junction<MethodDescription> methodConstraints();
 
-    public abstract AbstractMethodAdvise advise();
+    public abstract MethodAdvise advise();
 }
