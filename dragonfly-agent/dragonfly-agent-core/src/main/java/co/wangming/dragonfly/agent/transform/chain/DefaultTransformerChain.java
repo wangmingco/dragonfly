@@ -53,7 +53,7 @@ public class DefaultTransformerChain extends TransformerChain {
             if (wrapperBuilder != null) {
                 agentBuilder = wrapperBuilder;
             } else {
-                LOGGER.error("[TransformerChain] 返回的AgentBuilder为空");
+                LOGGER.error("[TransformerChain] {} 返回的AgentBuilder为空", transformer.getClass().getName());
             }
         }
 
