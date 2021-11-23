@@ -27,16 +27,12 @@ public abstract class MethodAdviseTransformer implements Transformer {
         final ElementMatcher.Junction<TypeDescription> typeMatcher = typeConstraints();
         final ElementMatcher.Junction<MethodDescription> methodMatcher = methodConstraints();
 
-        return builder
-                .type(typeMatcher)
-                .and(not(nameStartsWith(Constant.dragonflyPackageName())))
-                .and(not(nameStartsWith("java.")))
-                .and(not(nameStartsWith("sun.")))
-                .and(not(nameStartsWith("jdk.")))
-                .and(not(nameStartsWith("com.sun.")))
-                .and(not(nameStartsWith("net.bytebuddy.")))
-                .and(not(nameStartsWith("com.intellij.")))
-                .and(not(nameStartsWith("org.jetbrains.")))
+        AgentBuilder.Identified.Narrowable narrowable = builder.type(typeMatcher);
+        for (String skipPackage : Constant.skipPackages()) {
+            narrowable = narrowable.and(not(nameStartsWith(skipPackage)));
+        }
+
+        return narrowable
                 .transform(new AgentTransformer(advise, methodMatcher))
                 .asTerminalTransformation();
     }
@@ -56,7 +52,7 @@ public abstract class MethodAdviseTransformer implements Transformer {
 
             try {
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("构建方法代理: [{} - {}]", advise.name(), typeDescription.getName());
+                    LOGGER.debug("transform class: [{} - {}]", advise.name(), typeDescription.getName());
                 }
 
                 return builder.method(methodMatcher).intercept(
