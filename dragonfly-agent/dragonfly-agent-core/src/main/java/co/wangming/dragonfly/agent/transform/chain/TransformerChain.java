@@ -1,16 +1,11 @@
 package co.wangming.dragonfly.agent.transform.chain;
 
-import co.wangming.dragonfly.agent.transform.transformer.Transformer;
 import net.bytebuddy.agent.builder.AgentBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+public interface TransformerChain {
 
-public abstract class TransformerChain {
+    void build() throws InstantiationException, IllegalAccessException;
 
-    protected List<Transformer> chain = new ArrayList<>();
+    AgentBuilder invoke(AgentBuilder.Default builder);
 
-    public abstract void build() throws InstantiationException, IllegalAccessException;
-
-    public abstract AgentBuilder invoke(AgentBuilder.Default builder);
 }

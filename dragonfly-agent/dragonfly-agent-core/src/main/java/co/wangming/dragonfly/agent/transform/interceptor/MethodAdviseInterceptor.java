@@ -26,10 +26,10 @@ public class MethodAdviseInterceptor {
                             @SuperCall Callable callable) throws Exception {
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("进入Interceptor: [{}] 目标:{}#{}", adaptor.name(), clazz.getName(), method.getName());
+            LOGGER.debug("进入MethodAdviseInterceptor: [{}] 目标:{}#{}", adaptor.name(), clazz.getName(), method.getName());
         }
 
-        Object result = adaptor.intercept(clazz, method, thisObj, allArguments, callable);
+        final Object result = adaptor.intercept(clazz, method, thisObj, allArguments, callable);
 
         return result;
     }

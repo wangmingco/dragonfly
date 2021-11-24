@@ -19,12 +19,12 @@ public abstract class AbstractAdviseTransformer implements Transformer {
     @Override
     public AgentBuilder addTransform(AgentBuilder builder) {
 
-        final Adaptor advise = adaptor();
+        final Adaptor adaptor = adaptor();
         final ElementMatcher.Junction<TypeDescription> typeMatcher = typeConstraints();
         final ElementMatcher.Junction<MethodDescription> methodMatcher = methodConstraints();
 
         return builder.type(typeMatcher)
-                .transform(new AgentTransformer(advise, methodMatcher))
+                .transform(new AgentTransformer(adaptor, methodMatcher))
                 .asTerminalTransformation();
     }
 
@@ -43,7 +43,7 @@ public abstract class AbstractAdviseTransformer implements Transformer {
 
             try {
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("transform class: [{} - {}]", adaptor.name(), typeDescription.getName());
+                    LOGGER.debug("transform class: [{} - {}] 类型:{}", adaptor.name(), methodMatcher.getClass(), typeDescription.getName());
                 }
 
                 return builder.method(methodMatcher).intercept(

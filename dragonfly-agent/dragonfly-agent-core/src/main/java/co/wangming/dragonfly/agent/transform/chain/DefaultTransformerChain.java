@@ -8,12 +8,16 @@ import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DefaultTransformerChain extends TransformerChain {
+public class DefaultTransformerChain implements TransformerChain {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultTransformerChain.class);
+
+    protected List<Transformer> chain = new ArrayList<>();
 
     @Override
     public void build() throws InstantiationException, IllegalAccessException {
@@ -22,7 +26,7 @@ public class DefaultTransformerChain extends TransformerChain {
 
         if (LOGGER.isDebugEnabled()) {
             String names = subTypes.stream().map(it -> it.getName()).collect(Collectors.joining("\n    "));
-            LOGGER.debug("[TransformerChain] 找到 TransformComponent 列表:\n[\n    {}\n]", names);
+            LOGGER.debug("构建Transformer列表:\n[\n    {}\n]", names);
         }
 
         for (Class subType : subTypes) {
@@ -47,13 +51,13 @@ public class DefaultTransformerChain extends TransformerChain {
 
         for (Transformer transformer : chain) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("[TransformerChain] 构建Transformer: {}", transformer.getClass().getName());
+                LOGGER.debug("构建Transformer的类型: {}", transformer.getClass().getName());
             }
             AgentBuilder wrapperBuilder = transformer.addTransform(agentBuilder);
             if (wrapperBuilder != null) {
                 agentBuilder = wrapperBuilder;
             } else {
-                LOGGER.error("[TransformerChain] {} 返回的AgentBuilder为空", transformer.getClass().getName());
+                LOGGER.error("构建Transformer失败,返回的AgentBuilder为空. 类型: {}", transformer.getClass().getName());
             }
         }
 
