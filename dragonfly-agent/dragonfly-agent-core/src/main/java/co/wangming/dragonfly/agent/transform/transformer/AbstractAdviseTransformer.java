@@ -61,15 +61,16 @@ public abstract class AbstractAdviseTransformer implements Transformer {
 
             try {
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("transform class: [{} - {}] 类型:{}", adaptor.name(), methodMatcher.getClass(), typeDescription.getName());
+                    LOGGER.debug("transform class \n[\n    Adaptor -> {}, \n    methodMatcher -> {}, \n    类型 -> {} \n]",
+                            adaptor.name(), methodMatcher.getClass().getName(), typeDescription.getName());
                 }
 
                 return builder.method(methodMatcher).intercept(
                         MethodDelegation.withDefaultConfiguration().to(new Interceptor(adaptor))
                 );
             } catch (Exception e) {
-                LOGGER.error("添加代理方法异常", e);
-                // TODO
+                LOGGER.error("添加代理方法异常\n[\n    Adaptor -> {}, \n    methodMatcher -> {}, \n    类型 -> {} \n]",
+                        adaptor.name(), methodMatcher.getClass().getName(), typeDescription.getName(), e);
                 return builder;
             }
         }

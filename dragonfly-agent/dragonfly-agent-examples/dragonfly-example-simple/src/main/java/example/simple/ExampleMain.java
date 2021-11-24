@@ -1,4 +1,4 @@
-package co.wangming.dragonfly.example.simple;
+package example.simple;
 
 public class ExampleMain {
 

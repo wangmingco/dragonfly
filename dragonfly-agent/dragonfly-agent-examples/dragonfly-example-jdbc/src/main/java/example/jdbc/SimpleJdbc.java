@@ -1,4 +1,4 @@
-package co.wangming.dragonfly.example.jdbc;
+package example.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
