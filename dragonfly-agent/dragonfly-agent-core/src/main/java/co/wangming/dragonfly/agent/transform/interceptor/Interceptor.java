@@ -8,6 +8,12 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
+/**
+ * 默认的方法拦截器，该实现不会修改做扩展性设计，扩展主要是通过 {@link Adaptor} 进行扩展.
+ *
+ * @author: wangming
+ * @date: 2021/11/24
+ */
 public class Interceptor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Interceptor.class);

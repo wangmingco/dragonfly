@@ -7,6 +7,10 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 
+/**
+ * @author: wangming
+ * @date: 2021/11/24
+ */
 public class TraceMethodAdvise extends CatchExceptionAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TraceMethodAdvise.class);

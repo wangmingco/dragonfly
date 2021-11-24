@@ -7,6 +7,14 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.instrument.Instrumentation;
 
+/**
+ * Agent 入口.
+ * 在该入口中通过 TransformerChainFactory工厂类构建出 ByteBuddy#AgentBuilder,
+ * 然后将该AgentBuilder 安装到Instrumentation 上.
+ *
+ * @author: wangming
+ * @date: 2021/11/24
+ */
 public class DragonflyAgent {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DragonflyAgent.class);

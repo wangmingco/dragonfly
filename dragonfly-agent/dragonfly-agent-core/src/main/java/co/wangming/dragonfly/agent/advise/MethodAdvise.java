@@ -2,6 +2,10 @@ package co.wangming.dragonfly.agent.advise;
 
 import java.lang.reflect.Method;
 
+/**
+ * @author: wangming
+ * @date: 2021/11/24
+ */
 public interface MethodAdvise {
 
     String name();

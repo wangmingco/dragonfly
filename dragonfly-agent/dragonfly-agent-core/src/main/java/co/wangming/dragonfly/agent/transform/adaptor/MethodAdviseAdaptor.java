@@ -7,6 +7,12 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
+/**
+ * {@link Adaptor} 的 method advise 实现
+ *
+ * @author: wangming
+ * @date: 2021/11/24
+ */
 public class MethodAdviseAdaptor implements Adaptor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodAdviseAdaptor.class);

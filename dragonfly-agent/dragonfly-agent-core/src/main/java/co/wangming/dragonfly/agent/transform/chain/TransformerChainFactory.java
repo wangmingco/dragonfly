@@ -4,6 +4,12 @@ import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * {@link TransformerChain} 构造工厂
+ *
+ * @author: wangming
+ * @date: 2021/11/24
+ */
 public class TransformerChainFactory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransformerChainFactory.class);

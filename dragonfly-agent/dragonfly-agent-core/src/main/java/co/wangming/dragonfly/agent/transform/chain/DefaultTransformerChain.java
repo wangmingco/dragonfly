@@ -13,14 +13,22 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * {@link TransformerChain} 默认实现
+ *
+ * @author: wangming
+ * @date: 2021/11/24
+ */
 public class DefaultTransformerChain implements TransformerChain {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultTransformerChain.class);
 
-    protected List<Transformer> chain = new ArrayList<>();
+    protected List<Transformer> chain;
 
     @Override
     public void build() throws InstantiationException, IllegalAccessException {
+        chain = new ArrayList<>();
+
         Set<Class<?>> subTypes = ClassUtil.getTypesAnnotatedWith(Transform.class);
         subTypes.add(DefaultTransformer.class);
 

@@ -12,10 +12,28 @@ import net.bytebuddy.utility.JavaModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * {@link Transformer} 的实现类.
+ * <p>
+ * 该类抽象了三个方法:
+ * {@link AbstractAdviseTransformer#typeConstraints()}
+ * {@link AbstractAdviseTransformer#methodConstraints()}
+ * {@link AbstractAdviseTransformer#adaptor()}
+ * <p>
+ * {@link AbstractAdviseTransformer#methodConstraints()} 是 {@link AbstractAdviseTransformer#typeConstraints()} 约束的方法信息 。
+ * {@link AbstractAdviseTransformer#adaptor()} 是连接Transformer与Advise之间的连接器。
+ *
+ * @author: wangming
+ * @date: 2021/11/24
+ */
 public abstract class AbstractAdviseTransformer implements Transformer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAdviseTransformer.class);
 
+    /*
+     * 拿到子类的类型约束，方法约束以及连接目标Advise的连接器，然后构造出AgentTransformer，将其添加到 AgentBuilder上。
+     * 需要注意的是，扩展约束要添加在DefaultTransformer之前，将DefaultTransformer放在最后。
+     */
     @Override
     public AgentBuilder addTransform(AgentBuilder builder) {
 
@@ -57,9 +75,24 @@ public abstract class AbstractAdviseTransformer implements Transformer {
         }
     }
 
+    /**
+     * 类型约束
+     *
+     * @return
+     */
     public abstract ElementMatcher.Junction<TypeDescription> typeConstraints();
 
+    /**
+     * 方法约束
+     *
+     * @return
+     */
     public abstract ElementMatcher.Junction<MethodDescription> methodConstraints();
 
+    /**
+     * 目标Advise的连接器
+     *
+     * @return
+     */
     public abstract Adaptor adaptor();
 }
