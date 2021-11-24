@@ -1,6 +1,6 @@
 package co.wangming.dragonfly.agent.transform.interceptor;
 
-import co.wangming.dragonfly.agent.advise.MethodAdvise;
+import co.wangming.dragonfly.agent.transform.adaptor.Adaptor;
 import net.bytebuddy.implementation.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +12,10 @@ public class MethodAdviseInterceptor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodAdviseInterceptor.class);
 
-    private MethodAdvise advise;
+    private Adaptor adaptor;
 
-    public MethodAdviseInterceptor(MethodAdvise advise) {
-        this.advise = advise;
+    public MethodAdviseInterceptor(Adaptor advise) {
+        this.adaptor = advise;
     }
 
     @RuntimeType
@@ -26,10 +26,10 @@ public class MethodAdviseInterceptor {
                             @SuperCall Callable callable) throws Exception {
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("进入Interceptor: [{}] 目标:{}#{}", advise.name(), clazz.getName(), method.getName());
+            LOGGER.debug("进入Interceptor: [{}] 目标:{}#{}", adaptor.name(), clazz.getName(), method.getName());
         }
 
-        Object result = advise.intercept(clazz, method, thisObj, allArguments, callable);
+        Object result = adaptor.intercept(clazz, method, thisObj, allArguments, callable);
 
         return result;
     }

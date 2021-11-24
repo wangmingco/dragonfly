@@ -1,8 +1,7 @@
 package co.wangming.dragonfly.agent.transform.transformer;
 
-import co.wangming.dragonfly.agent.advise.MethodAdvise;
+import co.wangming.dragonfly.agent.transform.adaptor.Adaptor;
 import co.wangming.dragonfly.agent.transform.interceptor.MethodAdviseInterceptor;
-import co.wangming.dragonfly.agent.util.Constant;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
@@ -13,9 +12,6 @@ import net.bytebuddy.utility.JavaModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
-import static net.bytebuddy.matcher.ElementMatchers.not;
-
 public abstract class AbstractAdviseTransformer implements Transformer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAdviseTransformer.class);
@@ -23,27 +19,22 @@ public abstract class AbstractAdviseTransformer implements Transformer {
     @Override
     public AgentBuilder addTransform(AgentBuilder builder) {
 
-        final MethodAdvise advise = advise();
+        final Adaptor advise = adaptor();
         final ElementMatcher.Junction<TypeDescription> typeMatcher = typeConstraints();
         final ElementMatcher.Junction<MethodDescription> methodMatcher = methodConstraints();
 
-        AgentBuilder.Identified.Narrowable narrowable = builder.type(typeMatcher);
-        for (String skipPackage : Constant.skipPackages()) {
-            narrowable = narrowable.and(not(nameStartsWith(skipPackage)));
-        }
-
-        return narrowable
+        return builder.type(typeMatcher)
                 .transform(new AgentTransformer(advise, methodMatcher))
                 .asTerminalTransformation();
     }
 
     public static class AgentTransformer implements AgentBuilder.Transformer {
 
-        private MethodAdvise advise;
+        private Adaptor adaptor;
         private ElementMatcher.Junction<MethodDescription> methodMatcher;
 
-        AgentTransformer(MethodAdvise advise, ElementMatcher.Junction<MethodDescription> methodMatcher) {
-            this.advise = advise;
+        AgentTransformer(Adaptor adaptor, ElementMatcher.Junction<MethodDescription> methodMatcher) {
+            this.adaptor = adaptor;
             this.methodMatcher = methodMatcher;
         }
 
@@ -52,11 +43,11 @@ public abstract class AbstractAdviseTransformer implements Transformer {
 
             try {
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("transform class: [{} - {}]", advise.name(), typeDescription.getName());
+                    LOGGER.debug("transform class: [{} - {}]", adaptor.name(), typeDescription.getName());
                 }
 
                 return builder.method(methodMatcher).intercept(
-                        MethodDelegation.withDefaultConfiguration().to(new MethodAdviseInterceptor(advise))
+                        MethodDelegation.withDefaultConfiguration().to(new MethodAdviseInterceptor(adaptor))
                 );
             } catch (Exception e) {
                 LOGGER.error("添加代理方法异常", e);
@@ -70,5 +61,5 @@ public abstract class AbstractAdviseTransformer implements Transformer {
 
     public abstract ElementMatcher.Junction<MethodDescription> methodConstraints();
 
-    public abstract MethodAdvise advise();
+    public abstract Adaptor adaptor();
 }

@@ -6,6 +6,7 @@ public class ExampleMain {
         System.out.println("ExampleMain start");
 
         new HelloWorldService().print();
+        new HelloWorldService().throwException();
     }
 
 }
