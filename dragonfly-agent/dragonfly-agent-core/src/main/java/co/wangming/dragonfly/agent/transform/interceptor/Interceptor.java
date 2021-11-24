@@ -8,14 +8,14 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
-public class MethodAdviseInterceptor {
+public class Interceptor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MethodAdviseInterceptor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Interceptor.class);
 
     private Adaptor adaptor;
 
-    public MethodAdviseInterceptor(Adaptor advise) {
-        this.adaptor = advise;
+    public Interceptor(Adaptor adaptor) {
+        this.adaptor = adaptor;
     }
 
     @RuntimeType
