@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * @author: wangming
@@ -27,7 +28,7 @@ public class TraceMethodAdvise extends CatchExceptionAdvise {
     @Override
     public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("beforeExec: {}#{}", clazz.getName(), method.getName());
+            LOGGER.debug("beforeExec: {}#{} {}", clazz.getName(), method.getName(), Arrays.asList(allArguments));
         }
 
         try {
@@ -43,7 +44,7 @@ public class TraceMethodAdvise extends CatchExceptionAdvise {
     @Override
     public Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("afterExec: {}#{}", clazz.getName(), method.getName());
+            LOGGER.debug("afterExec: {}#{} {}", clazz.getName(), method.getName(), Arrays.asList(allArguments));
         }
         try {
             String traceId = getTraceId();

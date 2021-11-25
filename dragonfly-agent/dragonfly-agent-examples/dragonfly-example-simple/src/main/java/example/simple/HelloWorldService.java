@@ -2,8 +2,8 @@ package example.simple;
 
 public class HelloWorldService {
 
-    public void invokePublic() {
-        System.out.println("HelloWorldService invokePublic");
+    public void invokePublic(int idx) {
+        System.out.println("HelloWorldService invokePublic : " + idx);
 
         invokePrivate();
     }

@@ -1,6 +1,5 @@
 package co.wangming.dragonfly.agent.transform.transformer;
 
-import co.wangming.dragonfly.agent.util.Constant;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
@@ -19,13 +18,15 @@ public class DefaultTransformer extends TraceAdviseTransformer {
 
     @Override
     public ElementMatcher.Junction<TypeDescription> typeConstraints() {
-        ElementMatcher.Junction<TypeDescription> an = any();
-
-        ElementMatcher.Junction<TypeDescription> typeConstraints = null;
-        for (String skipPackage : Constant.skipPackages()) {
-            typeConstraints = an.and(not(nameStartsWith(skipPackage)));
-        }
-        return typeConstraints;
+        return any().
+                and(not(nameStartsWith("co.wangming.dragonfly.agent."))).
+                and(not(nameStartsWith("java."))).
+                and(not(nameStartsWith("sun."))).
+                and(not(nameStartsWith("jdk."))).
+                and(not(nameStartsWith("com.sun."))).
+                and(not(nameStartsWith("net.bytebuddy."))).
+                and(not(nameStartsWith("com.intellij."))).
+                and(not(nameStartsWith("org.jetbrains.")));
     }
 
     @Override
