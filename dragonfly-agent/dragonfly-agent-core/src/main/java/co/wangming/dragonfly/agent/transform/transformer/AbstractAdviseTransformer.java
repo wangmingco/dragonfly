@@ -69,7 +69,7 @@ public abstract class AbstractAdviseTransformer implements Transformer {
                         MethodDelegation.withDefaultConfiguration().to(new Interceptor(adaptor))
                 );
             } catch (Exception e) {
-                LOGGER.error("添加代理方法异常\n[\n    Adaptor -> {}, \n    methodMatcher -> {}, \n    类型 -> {} \n]",
+                LOGGER.error("transform class异常\n[\n    Adaptor -> {}, \n    methodMatcher -> {}, \n    类型 -> {} \n]",
                         adaptor.name(), methodMatcher.getClass().getName(), typeDescription.getName(), e);
                 return builder;
             }

@@ -18,20 +18,21 @@ public class DefaultTransformer extends TraceAdviseTransformer {
 
     @Override
     public ElementMatcher.Junction<TypeDescription> typeConstraints() {
-        return any().
-                and(not(nameStartsWith("co.wangming.dragonfly.agent."))).
+        return not(nameContains("$auxiliary$")).
+                and(not(nameStartsWith("co.wangming.dragonfly."))).
                 and(not(nameStartsWith("java."))).
                 and(not(nameStartsWith("sun."))).
                 and(not(nameStartsWith("jdk."))).
                 and(not(nameStartsWith("com.sun."))).
                 and(not(nameStartsWith("net.bytebuddy."))).
+                and(not(nameStartsWith("ch.qos.logback."))).
                 and(not(nameStartsWith("com.intellij."))).
                 and(not(nameStartsWith("org.jetbrains.")));
     }
 
     @Override
     public ElementMatcher.Junction<MethodDescription> methodConstraints() {
-        return any();
+        return any().and(not(nameContains("$auxiliary$")));
     }
 
 }

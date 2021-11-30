@@ -35,10 +35,14 @@ public class Interceptor {
                             @SuperCall Callable callable) throws Exception {
 
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("进入MethodAdviseInterceptor: [{}] 目标:{}#{}", adaptor.name(), clazz.getName(), method.getName());
+            LOGGER.debug("进入Interceptor---> \n[\n    Adaptor: {}\n    目标类: {}\n    目标方法: {}\n]", adaptor.name(), clazz.getName(), method.getName());
         }
 
         final Object result = adaptor.intercept(clazz, method, null, allArguments, callable);
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("离开Interceptor---> \n[\n    Adaptor: {}\n    目标类: {}\n    目标方法: {}\n]", adaptor.name(), clazz.getName(), method.getName());
+        }
 
         return result;
     }
