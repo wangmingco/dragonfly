@@ -1,7 +1,10 @@
 package co.wangming.dragonfly.agent.transform.interceptor;
 
 import co.wangming.dragonfly.agent.transform.adaptor.Adaptor;
-import net.bytebuddy.implementation.bind.annotation.*;
+import net.bytebuddy.implementation.bind.annotation.AllArguments;
+import net.bytebuddy.implementation.bind.annotation.Origin;
+import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +30,7 @@ public class Interceptor {
     @RuntimeType
     public Object intercept(@Origin Class clazz,
                             @Origin Method method,
-                            @This Object thisObj,
+//                            @This Object thisObj,
                             @AllArguments Object[] allArguments,
                             @SuperCall Callable callable) throws Exception {
 
@@ -35,7 +38,7 @@ public class Interceptor {
             LOGGER.debug("进入MethodAdviseInterceptor: [{}] 目标:{}#{}", adaptor.name(), clazz.getName(), method.getName());
         }
 
-        final Object result = adaptor.intercept(clazz, method, thisObj, allArguments, callable);
+        final Object result = adaptor.intercept(clazz, method, null, allArguments, callable);
 
         return result;
     }
