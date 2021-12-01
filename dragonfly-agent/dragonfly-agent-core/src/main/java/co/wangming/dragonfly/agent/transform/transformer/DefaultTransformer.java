@@ -32,7 +32,7 @@ public class DefaultTransformer extends TraceAdviseTransformer {
 
     @Override
     public ElementMatcher.Junction<MethodDescription> methodConstraints() {
-        return any().and(not(nameContains("$auxiliary$")));
+        return not(nameContains("$auxiliary$"));
     }
 
 }

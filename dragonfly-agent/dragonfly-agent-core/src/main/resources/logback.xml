@@ -21,6 +21,12 @@
         </encoder>
     </appender>
 
+    <logger name="co.wangming.dragonfly.agent.transform.adaptor" level="warn"></logger>
+    <logger name="co.wangming.dragonfly.agent.transform.chain" level="warn"></logger>
+    <logger name="co.wangming.dragonfly.agent.transform.interceptor" level="warn"></logger>
+    <logger name="co.wangming.dragonfly.agent.transform.transformer" level="debug"></logger>
+    <logger name="co.wangming.dragonfly.agent.advise" level="warn"></logger>
+
     <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
