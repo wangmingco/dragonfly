@@ -26,7 +26,7 @@ public interface Adaptor {
      * @return
      * @throws Exception
      */
-    Object intercept(Class clazz, Method method, Object thisObj, Object[] allArguments, Callable callable) throws Exception;
+    Object dispatch(Class clazz, Method method, Object thisObj, Object[] allArguments, Callable callable) throws Exception;
 
     /**
      * 连接器名称

@@ -38,7 +38,7 @@ public class Interceptor {
             LOGGER.debug("进入Interceptor---> \n[\n    Adaptor: {}\n    目标类: {}\n    目标方法: {}\n]", adaptor.name(), clazz.getName(), method.getName());
         }
 
-        final Object result = adaptor.intercept(clazz, method, null, allArguments, callable);
+        final Object result = adaptor.dispatch(clazz, method, null, allArguments, callable);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("离开Interceptor---> \n[\n    Adaptor: {}\n    目标类: {}\n    目标方法: {}\n]", adaptor.name(), clazz.getName(), method.getName());

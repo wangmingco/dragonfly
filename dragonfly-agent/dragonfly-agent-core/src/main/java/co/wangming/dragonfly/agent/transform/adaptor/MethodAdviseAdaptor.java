@@ -24,7 +24,7 @@ public class MethodAdviseAdaptor implements Adaptor {
     }
 
     @Override
-    public final Object intercept(Class clazz, Method method, Object thisObj, Object[] allArguments, Callable callable) throws Exception {
+    public final Object dispatch(Class clazz, Method method, Object thisObj, Object[] allArguments, Callable callable) throws Exception {
 
         try {
             this.advise.beforeExec(clazz, method, thisObj, allArguments);
