@@ -1,6 +1,6 @@
 package co.wangming.dragonfly.agent.transform.chain;
 
-import co.wangming.dragonfly.agent.transform.transformer.DefaultTransformer;
+import co.wangming.dragonfly.agent.transform.transformer.CatchTransformer;
 import co.wangming.dragonfly.agent.transform.transformer.Transform;
 import co.wangming.dragonfly.agent.transform.transformer.Transformer;
 import co.wangming.dragonfly.agent.util.ClassUtil;
@@ -30,7 +30,7 @@ public class DefaultTransformerChain implements TransformerChain {
         chain = new ArrayList<>();
 
         Set<Class<?>> subTypes = ClassUtil.getTypesAnnotatedWith(Transform.class);
-        subTypes.add(DefaultTransformer.class);
+        subTypes.add(CatchTransformer.class);
 
         if (LOGGER.isDebugEnabled()) {
             String names = subTypes.stream().map(it -> it.getName()).collect(Collectors.joining("\n    "));

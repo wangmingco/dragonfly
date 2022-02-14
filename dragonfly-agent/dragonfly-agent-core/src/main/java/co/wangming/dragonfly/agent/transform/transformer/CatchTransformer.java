@@ -12,9 +12,9 @@ import static net.bytebuddy.matcher.ElementMatchers.*;
  * @author: wangming
  * @date: 2021/11/24
  */
-public class DefaultTransformer extends TraceAdviseTransformer {
+public class CatchTransformer extends CatchAdviseTransformer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultTransformer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CatchTransformer.class);
 
     @Override
     public ElementMatcher.Junction<TypeDescription> typeConstraints() {

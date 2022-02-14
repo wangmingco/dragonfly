@@ -1,6 +1,6 @@
 package co.wangming.dragonfly.agent.transform.transformer;
 
-import co.wangming.dragonfly.agent.advise.TraceMethodAdvise;
+import co.wangming.dragonfly.agent.advise.CatchExceptionAdvise;
 import co.wangming.dragonfly.agent.transform.adaptor.Adaptor;
 import co.wangming.dragonfly.agent.transform.adaptor.MethodAdviseAdaptor;
 import org.slf4j.Logger;
@@ -14,13 +14,13 @@ import org.slf4j.LoggerFactory;
  * @author: wangming
  * @date: 2021/11/24
  */
-public abstract class TraceAdviseTransformer extends AbstractAdviseTransformer {
+public abstract class CatchAdviseTransformer extends AbstractAdviseTransformer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TraceAdviseTransformer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CatchAdviseTransformer.class);
 
     @Override
     public Adaptor adaptor() {
-        return new MethodAdviseAdaptor(new TraceMethodAdvise());
+        return new MethodAdviseAdaptor(new CatchExceptionAdvise());
     }
 
 }

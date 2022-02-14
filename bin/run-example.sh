@@ -8,12 +8,17 @@ EXAMPLE_JVM_PARAM=$4
 AGENT_JAR=dragonfly-agent-jar-0.1.jar
 EXAMPLE_AGENT=-javaagent:./${AGENT_JAR}
 
+echo "构建环境---->"
+mvn -v
+
+echo "参数信息---->"
 echo "EXAMPLE_PROJECT: ${EXAMPLE_PROJECT}"
 echo "EXAMPLE_JAR: ${EXAMPLE_JAR}"
 echo "EXAMPLE_CLASS_NAME: ${EXAMPLE_CLASS_NAME}"
 echo "EXAMPLE_JVM_PARAM: ${EXAMPLE_JVM_PARAM}"
 echo "EXAMPLE_AGENT: ${EXAMPLE_AGENT}"
 
+echo "开始构建---->"
 cd ..
 mvn clean
 mvn dependency:purge-local-repository -DreResolve=false -DmanualInclude="co.wangming"
