@@ -1,11 +1,16 @@
 package example.jdbc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class SimpleJdbc {
+
+    private static final Logger logger = LoggerFactory.getLogger(SimpleJdbc.class);
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dragonfly";
 
@@ -19,7 +24,7 @@ public class SimpleJdbc {
             e.printStackTrace();
         }
 
-        System.out.println("JDBC Demo开始运行");
+        logger.info("JDBC Demo开始运行");
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();) {
@@ -28,11 +33,11 @@ public class SimpleJdbc {
             try (ResultSet rs = stmt.executeQuery(sql);) {
                 while (rs.next()) {
                     int id = rs.getInt("id");
-                    System.out.print("User ID: " + id);
+                    logger.info("User ID: {}", id);
                 }
             }
         } catch (final Exception se) {
-            se.printStackTrace();
+            logger.error("", se);
         }
     }
 }

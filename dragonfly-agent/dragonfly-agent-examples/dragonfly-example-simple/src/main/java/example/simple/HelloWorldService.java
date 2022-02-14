@@ -1,25 +1,30 @@
 package example.simple;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class HelloWorldService {
 
+    private static final Logger logger = LoggerFactory.getLogger(HelloWorldService.class);
+
     public void invokePublic(int idx) {
-        System.out.println("HelloWorldService invokePublic : " + idx);
+        logger.info("HelloWorldService invokePublic : " + idx);
 
         invokePrivate();
     }
 
     private void invokePrivate() {
-        System.out.println("HelloWorldService invokePrivate");
+        logger.info("HelloWorldService invokePrivate");
     }
 
     public static void invokeStaticPublic() {
-        System.out.println("HelloWorldService invokeStaticPublic");
+        logger.info("HelloWorldService invokeStaticPublic");
 
         invokeStaticPrivate();
     }
 
     private static void invokeStaticPrivate() {
-        System.out.println("HelloWorldService invokePublic");
+        logger.info("HelloWorldService invokePublic");
     }
 
     public void throwException() {

@@ -1,9 +1,14 @@
 package example.simple;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ExampleMain {
 
+    private static final Logger logger = LoggerFactory.getLogger(ExampleMain.class);
+
     public static void main(String[] args) {
-        System.out.println("ExampleMain start");
+        logger.info("ExampleMain start");
 
         new HelloWorldService().invokePublic(1);
         new HelloWorldService().invokePublic(2);

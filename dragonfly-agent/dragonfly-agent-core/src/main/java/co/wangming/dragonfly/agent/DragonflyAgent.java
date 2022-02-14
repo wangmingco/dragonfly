@@ -21,9 +21,7 @@ public class DragonflyAgent {
 
     public static void premain(String arguments, Instrumentation instrumentation) throws Exception {
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Dragonfly 启动");
-        }
+        LOGGER.info("Dragonfly 启动");
 
         AgentBuilder.Default builder = new AgentBuilder.Default();
 
