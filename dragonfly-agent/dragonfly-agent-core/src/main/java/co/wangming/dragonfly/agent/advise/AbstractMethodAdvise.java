@@ -14,17 +14,17 @@ public abstract class AbstractMethodAdvise implements MethodAdvise {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMethodAdvise.class);
 
     @Override
-    public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
+    public Object beforeExec(Class clazz, Method method, Object[] allArguments) {
         return null;
     }
 
     @Override
-    public Object exceptionOnExec(Class clazz, Method method, Object thisObj, Object[] allArguments, Throwable e) {
+    public Object exceptionOnExec(Class clazz, Method method, Object[] allArguments, Throwable e) {
         return null;
     }
 
     @Override
-    public Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
+    public Object afterExec(Class clazz, Method method, Object[] allArguments) {
         return null;
     }
 }

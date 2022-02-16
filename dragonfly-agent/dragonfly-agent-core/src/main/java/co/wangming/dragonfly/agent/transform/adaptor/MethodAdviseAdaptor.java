@@ -27,11 +27,11 @@ public class MethodAdviseAdaptor implements Adaptor {
     }
 
     @Override
-    public final Object dispatch(Class clazz, Method method, Object thisObj, Object[] allArguments, Callable callable) throws Exception {
+    public final Object dispatch(Class clazz, Method method, Object[] allArguments, Callable callable) throws Exception {
 
         for (MethodAdvise advise : advises) {
             try {
-                advise.beforeExec(clazz, method, thisObj, allArguments);
+                advise.beforeExec(clazz, method, allArguments);
             } catch (Exception e) {
                 LOGGER.error("[方法增强] beforeExec {}#{} 发生异常", clazz.getName(), method.getName(), e);
             }
@@ -42,7 +42,7 @@ public class MethodAdviseAdaptor implements Adaptor {
         } catch (Throwable e) {
             for (MethodAdvise advise : advises) {
                 try {
-                    advise.exceptionOnExec(clazz, method, thisObj, allArguments, e);
+                    advise.exceptionOnExec(clazz, method, allArguments, e);
                 } catch (Exception e1) {
                     LOGGER.error("[方法增强] {}#{} exceptionOnExec 发生异常", clazz.getName(), method.getName(), e);
                 }
@@ -51,7 +51,7 @@ public class MethodAdviseAdaptor implements Adaptor {
         } finally {
             for (MethodAdvise advise : advises) {
                 try {
-                    advise.afterExec(clazz, method, thisObj, allArguments);
+                    advise.afterExec(clazz, method, allArguments);
                 } catch (Exception e1) {
                     LOGGER.error("[方法增强] afterExec {}#{} 发生异常", clazz.getName(), method.getName(), e1);
                 }

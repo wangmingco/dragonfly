@@ -1,10 +1,7 @@
 package co.wangming.dragonfly.agent.transform.interceptor;
 
 import co.wangming.dragonfly.agent.transform.adaptor.Adaptor;
-import net.bytebuddy.implementation.bind.annotation.AllArguments;
-import net.bytebuddy.implementation.bind.annotation.Origin;
-import net.bytebuddy.implementation.bind.annotation.RuntimeType;
-import net.bytebuddy.implementation.bind.annotation.SuperCall;
+import net.bytebuddy.implementation.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +24,20 @@ public class Interceptor {
         this.adaptor = adaptor;
     }
 
+    /**
+     * 在ByteBuddy 的文档中，对于 {@link This} 是用于访问对象的字段。
+     * 在本类中直接访问 {@link This} 对象的方法会直接产生栈溢出，因此将它移除掉
+     *
+     * @param clazz
+     * @param method
+     * @param allArguments
+     * @param callable
+     * @return
+     * @throws Exception
+     */
     @RuntimeType
     public Object intercept(@Origin Class clazz,
                             @Origin Method method,
-//                            @This Object thisObj,
                             @AllArguments Object[] allArguments,
                             @SuperCall Callable callable) throws Exception {
 
@@ -38,7 +45,7 @@ public class Interceptor {
             LOGGER.debug("进入Interceptor---> \n[\n    Adaptor: {}\n    目标类: {}\n    目标方法: {}\n]", adaptor.name(), clazz.getName(), method.getName());
         }
 
-        final Object result = adaptor.dispatch(clazz, method, null, allArguments, callable);
+        final Object result = adaptor.dispatch(clazz, method, allArguments, callable);
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("离开Interceptor---> \n[\n    Adaptor: {}\n    目标类: {}\n    目标方法: {}\n]", adaptor.name(), clazz.getName(), method.getName());

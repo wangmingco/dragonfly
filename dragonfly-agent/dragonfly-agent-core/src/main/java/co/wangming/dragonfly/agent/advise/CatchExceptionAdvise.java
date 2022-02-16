@@ -19,7 +19,7 @@ public class CatchExceptionAdvise extends AbstractMethodAdvise {
     }
 
     @Override
-    public Object exceptionOnExec(Class clazz, Method method, Object thisObj, Object[] allArguments, Throwable e) {
+    public Object exceptionOnExec(Class clazz, Method method, Object[] allArguments, Throwable e) {
         // TODO 异常捕获后发送到服务器
         LOGGER.error("捕获到异常:{}", clazz.getName() + "#" + method.getName(), e);
         return null;

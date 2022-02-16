@@ -16,16 +16,16 @@ public class MysqlTraceAdvise extends TraceMethodAdvise {
     }
 
     @Override
-    public Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
+    public Object beforeExec(Class clazz, Method method, Object[] allArguments) {
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.info("追踪到Mysql资源");
         }
-        return super.beforeExec(clazz, method, thisObj, allArguments);
+        return super.beforeExec(clazz, method, allArguments);
     }
 
     @Override
-    public Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments) {
-        return super.afterExec(clazz, method, thisObj, allArguments);
+    public Object afterExec(Class clazz, Method method, Object[] allArguments) {
+        return super.afterExec(clazz, method, allArguments);
     }
 }

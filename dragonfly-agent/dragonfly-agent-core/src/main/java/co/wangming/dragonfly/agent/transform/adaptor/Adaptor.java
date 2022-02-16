@@ -16,17 +16,16 @@ import java.util.concurrent.Callable;
 public interface Adaptor {
 
     /**
-     * 接受从 {@link Interceptor#intercept(Class, Method, Object, Object[], Callable)} 派发过来的方法。
+     * 接受从 {@link Interceptor#intercept(Class, Method, Object[], Callable)} 派发过来的方法。
      *
      * @param clazz
      * @param method
-     * @param thisObj
      * @param allArguments
      * @param callable
      * @return
      * @throws Exception
      */
-    Object dispatch(Class clazz, Method method, Object thisObj, Object[] allArguments, Callable callable) throws Exception;
+    Object dispatch(Class clazz, Method method, Object[] allArguments, Callable callable) throws Exception;
 
     /**
      * 连接器名称

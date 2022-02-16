@@ -10,10 +10,10 @@ public interface MethodAdvise {
 
     String name();
 
-    Object beforeExec(Class clazz, Method method, Object thisObj, Object[] allArguments);
+    Object beforeExec(Class clazz, Method method, Object[] allArguments);
 
-    Object exceptionOnExec(Class clazz, Method method, Object thisObj, Object[] allArguments, Throwable e);
+    Object exceptionOnExec(Class clazz, Method method, Object[] allArguments, Throwable e);
 
-    Object afterExec(Class clazz, Method method, Object thisObj, Object[] allArguments);
+    Object afterExec(Class clazz, Method method, Object[] allArguments);
 
 }
