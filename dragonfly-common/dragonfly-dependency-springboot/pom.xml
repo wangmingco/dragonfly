@@ -19,7 +19,7 @@
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <file.encoding>UTF-8</file.encoding>
         <maven.jar.version>3.2.0</maven.jar.version>
-        <springboot.version>2.5.4</springboot.version>
+        <springboot.version>2.6.3</springboot.version>
     </properties>
 
     <packaging>pom</packaging>
