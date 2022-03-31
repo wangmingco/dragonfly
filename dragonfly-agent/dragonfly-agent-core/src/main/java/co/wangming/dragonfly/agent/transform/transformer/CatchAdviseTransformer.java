@@ -20,7 +20,7 @@ public abstract class CatchAdviseTransformer extends AbstractAdviseTransformer {
 
     @Override
     public Adaptor adaptor() {
-        return new MethodAdviseAdaptor(new CatchExceptionAdvise());
+        return new MethodAdviseAdaptor(this, new CatchExceptionAdvise());
     }
 
 }

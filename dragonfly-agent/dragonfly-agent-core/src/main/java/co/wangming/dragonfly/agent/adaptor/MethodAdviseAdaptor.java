@@ -1,6 +1,7 @@
 package co.wangming.dragonfly.agent.adaptor;
 
 import co.wangming.dragonfly.agent.advise.MethodAdvise;
+import co.wangming.dragonfly.agent.transform.transformer.Transformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +23,12 @@ public class MethodAdviseAdaptor implements Adaptor {
 
     private List<MethodAdvise> advises;
 
-    public MethodAdviseAdaptor(MethodAdvise... advises) {
+    public MethodAdviseAdaptor(Transformer transformer, MethodAdvise... advises) {
         this.advises = Arrays.asList(advises);
+
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("为{} 添加MethodAdvise:{}", transformer.getClass().getSimpleName(), this.advises.stream().map(MethodAdvise::name).collect(Collectors.joining(", ")));
+        }
     }
 
     @Override
@@ -40,6 +45,7 @@ public class MethodAdviseAdaptor implements Adaptor {
         try {
             return callable.call();
         } catch (Throwable e) {
+            LOGGER.error("--------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", e);
             for (MethodAdvise advise : advises) {
                 try {
                     advise.exceptionOnExec(clazz, method, allArguments, e);

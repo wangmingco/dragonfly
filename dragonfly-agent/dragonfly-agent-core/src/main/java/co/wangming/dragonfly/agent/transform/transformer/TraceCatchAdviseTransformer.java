@@ -21,7 +21,7 @@ public abstract class TraceCatchAdviseTransformer extends AbstractAdviseTransfor
 
     @Override
     public Adaptor adaptor() {
-        return new MethodAdviseAdaptor(new TraceMethodAdvise(), new CatchExceptionAdvise());
+        return new MethodAdviseAdaptor(this, new TraceMethodAdvise(), new CatchExceptionAdvise());
     }
 
 }

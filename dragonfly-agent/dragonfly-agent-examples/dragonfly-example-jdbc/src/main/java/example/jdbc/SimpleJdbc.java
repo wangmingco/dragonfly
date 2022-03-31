@@ -37,7 +37,7 @@ public class SimpleJdbc {
                 }
             }
         } catch (final Exception se) {
-            logger.error("", se);
+            logger.error("发生异常", se);
         }
     }
 }
