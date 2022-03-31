@@ -1,6 +1,6 @@
-package co.wangming.dragonfly.agent.transform.interceptor;
+package co.wangming.dragonfly.agent.interceptor;
 
-import co.wangming.dragonfly.agent.transform.adaptor.Adaptor;
+import co.wangming.dragonfly.agent.adaptor.Adaptor;
 import net.bytebuddy.implementation.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,13 +14,13 @@ import java.util.concurrent.Callable;
  * @author: wangming
  * @date: 2021/11/24
  */
-public class Interceptor {
+public class InstanceInterceptor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Interceptor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(InstanceInterceptor.class);
 
     private Adaptor adaptor;
 
-    public Interceptor(Adaptor adaptor) {
+    public InstanceInterceptor(Adaptor adaptor) {
         this.adaptor = adaptor;
     }
 

@@ -1,7 +1,7 @@
 package co.wangming.dragonfly.agent.transform.transformer;
 
-import co.wangming.dragonfly.agent.transform.adaptor.Adaptor;
-import co.wangming.dragonfly.agent.transform.interceptor.Interceptor;
+import co.wangming.dragonfly.agent.adaptor.Adaptor;
+import co.wangming.dragonfly.agent.interceptor.InstanceInterceptor;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
@@ -66,7 +66,7 @@ public abstract class AbstractAdviseTransformer implements Transformer {
                 }
 
                 return builder.method(methodMatcher).intercept(
-                        MethodDelegation.withDefaultConfiguration().to(new Interceptor(adaptor))
+                        MethodDelegation.withDefaultConfiguration().to(new InstanceInterceptor(adaptor))
                 );
             } catch (Exception e) {
                 LOGGER.error("transform class异常\n[\n    Adaptor -> {}, \n    methodMatcher -> {}, \n    类型 -> {} \n]",

@@ -1,6 +1,6 @@
-package co.wangming.dragonfly.agent.transform.adaptor;
+package co.wangming.dragonfly.agent.adaptor;
 
-import co.wangming.dragonfly.agent.transform.interceptor.Interceptor;
+import co.wangming.dragonfly.agent.interceptor.InstanceInterceptor;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
 public interface Adaptor {
 
     /**
-     * 接受从 {@link Interceptor#intercept(Class, Method, Object[], Callable)} 派发过来的方法。
+     * 接受从 {@link InstanceInterceptor#intercept(Class, Method, Object[], Callable)} 派发过来的方法。
      *
      * @param clazz
      * @param method
