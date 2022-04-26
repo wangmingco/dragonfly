@@ -1,9 +1,11 @@
 package co.wangming.dragonfly.agent.transform.chain;
 
+import co.wangming.dragonfly.agent.listener.DefaultListener;
 import co.wangming.dragonfly.agent.transform.transformer.CatchTransformer;
 import co.wangming.dragonfly.agent.transform.transformer.Transform;
 import co.wangming.dragonfly.agent.transform.transformer.Transformer;
 import co.wangming.dragonfly.agent.util.ClassUtil;
+import co.wangming.dragonfly.agent.util.Constant;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
+import static net.bytebuddy.matcher.ElementMatchers.not;
 
 /**
  * {@link TransformerChain} 默认实现
@@ -47,15 +52,12 @@ public class DefaultTransformerChain implements TransformerChain {
     public AgentBuilder invoke(AgentBuilder.Default builder) {
 
         AgentBuilder agentBuilder = builder
-//                .ignore(nameStartsWith(Constant.dragonflyPackageName()))
-//                .ignore(nameStartsWith("java."))
-//                .ignore(nameStartsWith("sun."))
-//                .ignore(nameStartsWith("jdk."))
-//                .ignore(nameStartsWith("com.sun."))
-//                .ignore(nameStartsWith("net.bytebuddy."))
-//                .ignore(nameStartsWith("com.intellij."))
-//                .ignore(nameStartsWith("org.jetbrains."))
+                .with(new DefaultListener())
                 ;
+
+        for (String name : Constant.ignoreNameStartWith()) {
+            agentBuilder = agentBuilder.ignore(nameStartsWith(name));
+        }
 
         for (Transformer transformer : chain) {
             if (LOGGER.isDebugEnabled()) {

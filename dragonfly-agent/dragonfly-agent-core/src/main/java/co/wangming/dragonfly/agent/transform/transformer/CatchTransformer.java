@@ -1,5 +1,7 @@
 package co.wangming.dragonfly.agent.transform.transformer;
 
+import co.wangming.dragonfly.agent.util.Constant;
+import net.bytebuddy.description.NamedElement;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
@@ -18,17 +20,13 @@ public class CatchTransformer extends CatchAdviseTransformer {
 
     @Override
     public ElementMatcher.Junction<TypeDescription> typeConstraints() {
-        return not(nameContains("$auxiliary$"))
-                .and(not(nameStartsWith("co.wangming.dragonfly.")))
-                .and(not(nameStartsWith("java.")))
-                .and(not(nameStartsWith("sun.")))
-                .and(not(nameStartsWith("jdk.")))
-                .and(not(nameStartsWith("com.sun.")))
-                .and(not(nameStartsWith("net.bytebuddy.")))
-                .and(not(nameStartsWith("ch.qos.logback.")))
-                .and(not(nameStartsWith("com.intellij.")))
-                .and(not(nameStartsWith("org.jetbrains.")))
-                ;
+        ElementMatcher.Junction<TypeDescription> junction = not(nameContains("$auxiliary$"));
+
+        for (String name : Constant.ignoreNameStartWith()) {
+            junction = junction.and(not(nameStartsWith(name)));
+        }
+
+        return junction;
     }
 
     @Override

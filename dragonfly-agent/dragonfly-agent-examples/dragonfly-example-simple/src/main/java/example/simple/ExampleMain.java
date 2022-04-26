@@ -8,7 +8,7 @@ public class ExampleMain {
     private static final Logger logger = LoggerFactory.getLogger(ExampleMain.class);
 
     public static void main(String[] args) {
-        logger.info("ExampleMain start");
+        logger.info("ExampleMain start. class dump folder: " + System.getProperty("net.bytebuddy.dump"));
 
         new HelloWorldService().invokePublic(1);
         new HelloWorldService().invokePublic(2);

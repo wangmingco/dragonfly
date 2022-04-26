@@ -7,6 +7,8 @@ EXAMPLE_JVM_PARAM=$4
 
 AGENT_JAR=dragonfly-agent-jar-0.1.jar
 EXAMPLE_AGENT=-javaagent:./${AGENT_JAR}
+BYTE_BUDDY_PARAMS=-Dnet.bytebuddy.dump=./classesdump
+DEBUG_PARAMS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=12009
 
 echo "构建环境---->"
 mvn -v
@@ -16,7 +18,9 @@ echo "EXAMPLE_PROJECT: ${EXAMPLE_PROJECT}"
 echo "EXAMPLE_JAR: ${EXAMPLE_JAR}"
 echo "EXAMPLE_CLASS_NAME: ${EXAMPLE_CLASS_NAME}"
 echo "EXAMPLE_JVM_PARAM: ${EXAMPLE_JVM_PARAM}"
+echo "BYTE_BUDDY_PARAMS: ${BYTE_BUDDY_PARAMS}"
 echo "EXAMPLE_AGENT: ${EXAMPLE_AGENT}"
+echo "DEBUG_PARAMS: ${DEBUG_PARAMS}"
 
 echo "开始构建---->"
 cd ..
@@ -30,8 +34,15 @@ cp ./dragonfly-agent-jar/target/${AGENT_JAR} ./dragonfly-agent-examples/${EXAMPL
 
 cd ./dragonfly-agent-examples/${EXAMPLE_PROJECT}/target
 
+echo "工作目录:"`pwd`
+mkdir classesdump
+
 if [ -z "${EXAMPLE_CLASS_NAME}" ]; then
-  java ${EXAMPLE_AGENT} ${EXAMPLE_JVM_PARAM} -jar ./${EXAMPLE_JAR}
+  echo "执行命令: java ${EXAMPLE_AGENT} ${EXAMPLE_JVM_PARAM} ${BYTE_BUDDY_PARAMS} -jar ./${EXAMPLE_JAR}"
+
+  java ${EXAMPLE_AGENT} ${EXAMPLE_JVM_PARAM} ${BYTE_BUDDY_PARAMS} -jar ./${EXAMPLE_JAR}
 else
-  java ${EXAMPLE_AGENT} ${EXAMPLE_JVM_PARAM} -cp ./${EXAMPLE_JAR} ${EXAMPLE_CLASS_NAME}
+  echo "执行命令: java ${EXAMPLE_AGENT} ${EXAMPLE_JVM_PARAM} ${BYTE_BUDDY_PARAMS} -cp ./${EXAMPLE_JAR} ${EXAMPLE_CLASS_NAME}"
+
+  java ${EXAMPLE_AGENT} ${EXAMPLE_JVM_PARAM} ${BYTE_BUDDY_PARAMS} -cp ./${EXAMPLE_JAR} ${EXAMPLE_CLASS_NAME}
 fi
