@@ -1,7 +1,6 @@
 package co.wangming.dragonfly.agent;
 
 import co.wangming.dragonfly.agent.transform.chain.TransformerChainFactory;
-import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,13 +20,17 @@ public class DragonflyAgent {
 
     public static void premain(String arguments, Instrumentation instrumentation) throws Exception {
 
-        LOGGER.info("Dragonfly 启动");
+        LOGGER.info("Dragonfly 启动. 参数:{}", arguments);
 
-        AgentBuilder.Default builder = new AgentBuilder.Default();
-
-        AgentBuilder agentBuilder = TransformerChainFactory.buildDefault(builder);
-
-        agentBuilder.installOn(instrumentation);
+        switch (arguments) {
+            case "mock": {
+                TransformerChainFactory.buildMock(instrumentation);
+                break;
+            }
+            default: {
+                TransformerChainFactory.buildDefault(instrumentation);
+            }
+        }
 
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Dragonfly 构建完成");

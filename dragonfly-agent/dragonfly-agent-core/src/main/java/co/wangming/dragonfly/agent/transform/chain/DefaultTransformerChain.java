@@ -10,13 +10,13 @@ import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.instrument.Instrumentation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import static net.bytebuddy.matcher.ElementMatchers.nameStartsWith;
-import static net.bytebuddy.matcher.ElementMatchers.not;
 
 /**
  * {@link TransformerChain} 默认实现
@@ -28,11 +28,18 @@ public class DefaultTransformerChain implements TransformerChain {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultTransformerChain.class);
 
-    protected List<Transformer> chain;
+    protected List<Transformer> chain = new ArrayList<>();
+    ;
+    protected AgentBuilder agentBuilder;
+
+    public DefaultTransformerChain() {
+        agentBuilder = new AgentBuilder
+                .Default()
+                .with(new DefaultListener());
+    }
 
     @Override
-    public void build() throws InstantiationException, IllegalAccessException {
-        chain = new ArrayList<>();
+    public TransformerChain scanTransformers() throws InstantiationException, IllegalAccessException {
 
         Set<Class<?>> subTypes = ClassUtil.getTypesAnnotatedWith(Transform.class);
         subTypes.add(CatchTransformer.class);
@@ -46,14 +53,12 @@ public class DefaultTransformerChain implements TransformerChain {
             Transformer instance = (Transformer) subType.newInstance();
             chain.add(instance);
         }
+
+        return this;
     }
 
     @Override
-    public AgentBuilder invoke(AgentBuilder.Default builder) {
-
-        AgentBuilder agentBuilder = builder
-                .with(new DefaultListener())
-                ;
+    public TransformerChain registerTransformers() {
 
         for (String name : Constant.ignoreNameStartWith()) {
             agentBuilder = agentBuilder.ignore(nameStartsWith(name));
@@ -71,6 +76,12 @@ public class DefaultTransformerChain implements TransformerChain {
             }
         }
 
-        return agentBuilder;
+        return this;
+    }
+
+    @Override
+    public TransformerChain installOn(Instrumentation instrumentation) {
+        agentBuilder.installOn(instrumentation);
+        return this;
     }
 }

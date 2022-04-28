@@ -1,7 +1,6 @@
 package co.wangming.dragonfly.agent.transform.transformer;
 
 import co.wangming.dragonfly.agent.util.Constant;
-import net.bytebuddy.description.NamedElement;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.matcher.ElementMatcher;
