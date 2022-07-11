@@ -29,12 +29,6 @@
             <groupId>io.zipkin.reporter2</groupId>
             <artifactId>zipkin-sender-kafka</artifactId>
             <version>${zipkin.reporter2.version}</version>
-            <!--            <exclusions>-->
-            <!--                <exclusion>-->
-            <!--                    <groupId>org.slf4j</groupId>-->
-            <!--                    <artifactId>slf4j-api</artifactId>-->
-            <!--                </exclusion>-->
-            <!--            </exclusions>-->
         </dependency>
 
         <dependency>

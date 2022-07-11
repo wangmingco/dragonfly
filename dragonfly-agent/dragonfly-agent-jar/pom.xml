@@ -68,10 +68,10 @@
                             </transformers>
                             <relocations>
                                 <!-- TODO FIX -> logback 改变包名报错 -->
-                                <!--                                <relocation>-->
-                                <!--                                    <pattern>ch.qos.logback</pattern>-->
-                                <!--                                    <shadedPattern>co.wangming.dragonfly.ch.qos.logback</shadedPattern>-->
-                                <!--                                </relocation>-->
+                                <!-- <relocation>-->
+                                <!-- <pattern>ch.qos.logback</pattern>-->
+                                <!-- <shadedPattern>co.wangming.dragonfly.ch.qos.logback</shadedPattern>-->
+                                <!-- </relocation>-->
 
                                 <relocation>
                                     <pattern>net.bytebuddy</pattern>

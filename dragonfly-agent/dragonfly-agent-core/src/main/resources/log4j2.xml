@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} [%t] [%-5p] %logger{16} - %msg %n"/>
+
+    <Appenders>
+        <Console name="consoleAppender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>${pattern}</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="rollingFileAppender" fileName="logs/dragonfly-core.log"
+                     filePattern="logs/dragonfly-core-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${pattern}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="co.wangming.dragonfly.agent.transform.adaptor" level="warn" additivity="false">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="rollingFileAppender"/>
+        </Logger>
+        <Logger name="co.wangming.dragonfly.agent.transform.chain" level="warn" additivity="false">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="rollingFileAppender"/>
+        </Logger>
+        <Logger name="co.wangming.dragonfly.agent.transform.interceptor" level="debug" additivity="false">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="rollingFileAppender"/>
+        </Logger>
+        <Logger name="co.wangming.dragonfly.agent.transform.transformer" level="warn" additivity="false">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="rollingFileAppender"/>
+        </Logger>
+        <Logger name="co.wangming.dragonfly.agent.advise" level="warn">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="rollingFileAppender"/>
+        </Logger>
+
+        <Root level="info">
+            <appender-ref ref="consoleAppender"/>
+            <appender-ref ref="rollingFileAppender"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>

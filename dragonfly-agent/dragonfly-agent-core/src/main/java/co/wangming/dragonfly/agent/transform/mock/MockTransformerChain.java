@@ -4,12 +4,16 @@ import co.wangming.dragonfly.agent.listener.DefaultListener;
 import co.wangming.dragonfly.agent.transform.chain.TransformerChain;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.implementation.MethodDelegation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.instrument.Instrumentation;
 
 import static net.bytebuddy.matcher.ElementMatchers.any;
 
 public class MockTransformerChain implements TransformerChain {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MockTransformerChain.class);
 
     protected AgentBuilder agentBuilder;
 
@@ -29,7 +33,7 @@ public class MockTransformerChain implements TransformerChain {
         agentBuilder = agentBuilder
                 .type(any())
                 .transform((builder, typeDescription, classLoader, module) -> {
-                            System.out.println("构建方法代理: " + typeDescription.getName());
+                    LOGGER.info("构建方法代理: " + typeDescription.getName());
                             return builder
                                     .method(any())
                                     .intercept(MethodDelegation.to(new MockDelegation()));
