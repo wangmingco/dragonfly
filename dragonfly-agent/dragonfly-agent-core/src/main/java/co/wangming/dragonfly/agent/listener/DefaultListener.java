@@ -13,7 +13,6 @@ public class DefaultListener implements AgentBuilder.Listener {
 
     @Override
     public void onDiscovery(String typeName, ClassLoader classLoader, JavaModule module, boolean loaded) {
-        LOGGER.debug("onDiscovery {}", typeName);
     }
 
     @Override
@@ -23,7 +22,6 @@ public class DefaultListener implements AgentBuilder.Listener {
 
     @Override
     public void onIgnored(TypeDescription typeDescription, ClassLoader classLoader, JavaModule module, boolean loaded) {
-        LOGGER.debug("onIgnored {}", typeDescription.getName());
     }
 
     @Override
@@ -33,6 +31,5 @@ public class DefaultListener implements AgentBuilder.Listener {
 
     @Override
     public void onComplete(String typeName, ClassLoader classLoader, JavaModule module, boolean loaded) {
-        LOGGER.debug("onComplete {}", typeName);
     }
 }

@@ -18,9 +18,7 @@ public class MysqlTraceAdvise extends TraceMethodAdvise {
     @Override
     public Object beforeExec(Class clazz, Method method, Object[] allArguments) {
 
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.info("追踪到Mysql资源");
-        }
+        LOGGER.info("追踪到Mysql资源");
         return super.beforeExec(clazz, method, allArguments);
     }
 

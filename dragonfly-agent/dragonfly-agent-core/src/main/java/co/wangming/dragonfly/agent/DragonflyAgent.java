@@ -1,5 +1,6 @@
 package co.wangming.dragonfly.agent;
 
+import co.wangming.dragonfly.agent.common.Config;
 import co.wangming.dragonfly.agent.transform.chain.TransformerChainFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ public class DragonflyAgent {
                 break;
             }
             default: {
+                Config.commonCatchPackageName = arguments;
                 TransformerChainFactory.buildDefault(instrumentation);
             }
         }

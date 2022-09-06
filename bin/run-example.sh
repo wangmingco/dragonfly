@@ -7,7 +7,7 @@ EXAMPLE_JVM_PARAM=$4
 
 CLASS_DUMP_DIR=classesdump
 AGENT_JAR=dragonfly-agent-jar-0.1.jar
-EXAMPLE_AGENT=-javaagent:./${AGENT_JAR}=mock
+EXAMPLE_AGENT=-javaagent:./${AGENT_JAR}=example
 BYTE_BUDDY_PARAMS=-Dnet.bytebuddy.dump=./${CLASS_DUMP_DIR}
 DEBUG_PARAMS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=12009
 

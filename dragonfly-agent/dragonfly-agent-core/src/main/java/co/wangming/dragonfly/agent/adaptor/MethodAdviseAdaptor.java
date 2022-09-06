@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -24,10 +25,14 @@ public class MethodAdviseAdaptor implements Adaptor {
     private List<MethodAdvise> advises;
 
     public MethodAdviseAdaptor(Transformer transformer, MethodAdvise... advises) {
-        this.advises = Arrays.asList(advises);
-
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("为{} 添加MethodAdvise:{}", transformer.getClass().getSimpleName(), this.advises.stream().map(MethodAdvise::name).collect(Collectors.joining(", ")));
+        if (advises == null || advises.length == 0) {
+            this.advises = new ArrayList<>();
+            LOGGER.warn("为{} 添加MethodAdvise为空", transformer.getClass().getSimpleName());
+        } else {
+            this.advises = Arrays.asList(advises);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("为{} 添加MethodAdvise:{}", transformer.getClass().getSimpleName(), this.advises.stream().map(MethodAdvise::name).collect(Collectors.joining(", ")));
+            }
         }
     }
 

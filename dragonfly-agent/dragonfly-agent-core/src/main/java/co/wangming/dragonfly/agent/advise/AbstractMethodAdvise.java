@@ -15,16 +15,25 @@ public abstract class AbstractMethodAdvise implements MethodAdvise {
 
     @Override
     public Object beforeExec(Class clazz, Method method, Object[] allArguments) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("[方法增强] 执行前:{} - {}", clazz.getCanonicalName(), method.getName());
+        }
         return null;
     }
 
     @Override
     public Object exceptionOnExec(Class clazz, Method method, Object[] allArguments, Throwable e) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("[方法增强] 执行发生异常:{} - {}", clazz.getCanonicalName(), method.getName());
+        }
         return null;
     }
 
     @Override
     public Object afterExec(Class clazz, Method method, Object[] allArguments) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("[方法增强] 执行后:{} - {}", clazz.getCanonicalName(), method.getName());
+        }
         return null;
     }
 }

@@ -1,7 +1,7 @@
 package co.wangming.dragonfly.agent.transform.chain;
 
 import co.wangming.dragonfly.agent.listener.DefaultListener;
-import co.wangming.dragonfly.agent.transform.transformer.CatchTransformer;
+import co.wangming.dragonfly.agent.transform.transformer.OnlyCatchAdviseTransformer;
 import co.wangming.dragonfly.agent.transform.transformer.Transform;
 import co.wangming.dragonfly.agent.transform.transformer.Transformer;
 import co.wangming.dragonfly.agent.util.ClassUtil;
@@ -42,7 +42,7 @@ public class DefaultTransformerChain implements TransformerChain {
     public TransformerChain scanTransformers() throws InstantiationException, IllegalAccessException {
 
         Set<Class<?>> subTypes = ClassUtil.getTypesAnnotatedWith(Transform.class);
-        subTypes.add(CatchTransformer.class);
+        subTypes.add(OnlyCatchAdviseTransformer.class);
 
         if (LOGGER.isDebugEnabled()) {
             String names = subTypes.stream().map(it -> it.getName()).collect(Collectors.joining("\n    "));
