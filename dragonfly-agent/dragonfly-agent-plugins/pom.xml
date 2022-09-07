@@ -21,6 +21,7 @@
         <module>dragonfly-agent-plugin-httpclient</module>
         <module>dragonfly-agent-plugin-okhttp</module>
         <module>dragonfly-agent-plugin-servlet</module>
+        <module>dragonfly-agent-plugin-springtx</module>
     </modules>
 
 </project>

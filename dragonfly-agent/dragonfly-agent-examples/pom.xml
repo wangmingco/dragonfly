@@ -18,6 +18,7 @@
     <modules>
         <module>dragonfly-example-simple</module>
         <module>dragonfly-example-jdbc</module>
+        <module>dragonfly-example-springtx</module>
         <module>dragonfly-example-springboot</module>
         <module>dragonfly-example-thread</module>
     </modules>

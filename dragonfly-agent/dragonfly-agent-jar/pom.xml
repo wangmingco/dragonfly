@@ -35,6 +35,12 @@
 
         <dependency>
             <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-agent-plugin-springtx</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>co.wangming</groupId>
             <artifactId>dragonfly-agent-plugin-httpclient</artifactId>
             <version>${revision}</version>
         </dependency>
