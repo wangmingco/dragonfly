@@ -60,10 +60,6 @@ public class DefaultTransformerChain implements TransformerChain {
     @Override
     public TransformerChain registerTransformers() {
 
-        for (String name : Constant.ignoreNameStartWith()) {
-            agentBuilder = agentBuilder.ignore(nameStartsWith(name));
-        }
-
         for (Transformer transformer : chain) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("构建Transformer的类型: {}", transformer.getClass().getName());
@@ -75,6 +71,11 @@ public class DefaultTransformerChain implements TransformerChain {
                 LOGGER.error("构建Transformer失败,返回的AgentBuilder为空. 类型: {}", transformer.getClass().getName());
             }
         }
+
+        // 现在是严格匹配因此不再需要ignore
+//        for (String name : Constant.ignoreNameStartWith()) {
+//            agentBuilder = agentBuilder.ignore(nameStartsWith(name));
+//        }
 
         return this;
     }

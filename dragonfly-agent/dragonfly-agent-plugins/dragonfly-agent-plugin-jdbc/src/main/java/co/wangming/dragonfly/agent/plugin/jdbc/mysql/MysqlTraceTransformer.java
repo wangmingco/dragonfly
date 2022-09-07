@@ -11,7 +11,7 @@ public abstract class MysqlTraceTransformer extends AbstractAdviseTransformer {
 
     @Override
     public Adaptor adaptor() {
-        return new MethodAdviseAdaptor(this, new MysqlTraceAdvise(), new CatchExceptionAdvise());
+        return new MethodAdviseAdaptor(this, new MysqlTraceAdvise(this), new CatchExceptionAdvise(this));
     }
 
 }

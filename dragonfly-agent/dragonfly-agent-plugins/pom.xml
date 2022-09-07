@@ -16,9 +16,11 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>dragonfly-agent-plugin-thread</module>
         <module>dragonfly-agent-plugin-jdbc</module>
         <module>dragonfly-agent-plugin-httpclient</module>
         <module>dragonfly-agent-plugin-okhttp</module>
+        <module>dragonfly-agent-plugin-servlet</module>
     </modules>
 
 </project>

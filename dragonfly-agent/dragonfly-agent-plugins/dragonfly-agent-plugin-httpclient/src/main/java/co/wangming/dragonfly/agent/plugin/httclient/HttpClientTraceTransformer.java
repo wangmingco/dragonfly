@@ -11,7 +11,7 @@ public abstract class HttpClientTraceTransformer extends AbstractAdviseTransform
 
     @Override
     public Adaptor adaptor() {
-        return new MethodAdviseAdaptor(this, new HttpClientTraceAdvise(), new CatchExceptionAdvise());
+        return new MethodAdviseAdaptor(this, new HttpClientTraceAdvise(this), new CatchExceptionAdvise(this));
     }
 
 }

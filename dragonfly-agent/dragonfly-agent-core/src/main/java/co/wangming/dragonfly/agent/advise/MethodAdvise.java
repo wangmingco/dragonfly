@@ -1,5 +1,7 @@
 package co.wangming.dragonfly.agent.advise;
 
+import co.wangming.dragonfly.agent.transform.transformer.Transformer;
+
 import java.lang.reflect.Method;
 
 /**
@@ -7,6 +9,8 @@ import java.lang.reflect.Method;
  * @date: 2021/11/24
  */
 public interface MethodAdvise {
+
+    Transformer transformer();
 
     String name();
 

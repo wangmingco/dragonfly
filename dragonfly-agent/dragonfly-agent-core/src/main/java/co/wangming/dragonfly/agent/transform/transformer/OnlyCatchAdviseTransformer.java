@@ -23,7 +23,7 @@ public class OnlyCatchAdviseTransformer extends AbstractAdviseTransformer {
 
     @Override
     public Adaptor adaptor() {
-        return new MethodAdviseAdaptor(this, new CatchExceptionAdvise());
+        return new MethodAdviseAdaptor(this, new CatchExceptionAdvise(this));
     }
 
     @Override

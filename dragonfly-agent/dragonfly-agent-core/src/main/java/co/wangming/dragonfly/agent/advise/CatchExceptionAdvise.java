@@ -1,5 +1,6 @@
 package co.wangming.dragonfly.agent.advise;
 
+import co.wangming.dragonfly.agent.transform.transformer.Transformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +13,10 @@ import java.lang.reflect.Method;
 public class CatchExceptionAdvise extends AbstractMethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CatchExceptionAdvise.class);
+
+    public CatchExceptionAdvise(Transformer transformer) {
+        super(transformer);
+    }
 
     @Override
     public String name() {

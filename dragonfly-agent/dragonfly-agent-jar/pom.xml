@@ -23,7 +23,31 @@
 
         <dependency>
             <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-agent-plugin-thread</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>co.wangming</groupId>
             <artifactId>dragonfly-agent-plugin-jdbc</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-agent-plugin-httpclient</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-agent-plugin-okhttp</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>co.wangming</groupId>
+            <artifactId>dragonfly-agent-plugin-servlet</artifactId>
             <version>${revision}</version>
         </dependency>
 

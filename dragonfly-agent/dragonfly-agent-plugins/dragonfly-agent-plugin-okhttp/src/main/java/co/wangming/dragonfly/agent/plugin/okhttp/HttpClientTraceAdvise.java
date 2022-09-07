@@ -1,6 +1,7 @@
 package co.wangming.dragonfly.agent.plugin.okhttp;
 
 import co.wangming.dragonfly.agent.advise.TraceMethodAdvise;
+import co.wangming.dragonfly.agent.transform.transformer.Transformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +10,10 @@ import java.lang.reflect.Method;
 public class HttpClientTraceAdvise extends TraceMethodAdvise {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpClientTraceAdvise.class);
+
+    public HttpClientTraceAdvise(Transformer transformer) {
+        super(transformer);
+    }
 
     @Override
     public String name() {
