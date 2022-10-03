@@ -19,7 +19,7 @@
         <bytebuddy.version>1.12.8</bytebuddy.version>
         <reflections.version>0.10.2</reflections.version>
         <log4j.version>2.19.0</log4j.version>
-        <slf4j.version>2.0.1</slf4j.version>
+        <slf4j.version>1.7.36</slf4j.version>
     </properties>
 
     <dependencies>
@@ -60,7 +60,7 @@
         <!--用于与slf4j保持桥接-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j2-impl</artifactId>
+            <artifactId>log4j-slf4j-impl</artifactId>
             <version>${log4j.version}</version>
         </dependency>
 
@@ -98,7 +98,7 @@
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
-                                        <Premain-Class>co.wangming.dragonfly.agent.DragonflyAgent</Premain-Class>
+                                        <Premain-Class>co.wangming.dragonfly.agent.core.DragonflyAgent</Premain-Class>
                                         <Can-Redefine-Classes>true</Can-Redefine-Classes>
                                         <Can-Retransform-Classes>true</Can-Retransform-Classes>
                                     </manifestEntries>

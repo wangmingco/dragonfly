@@ -90,7 +90,7 @@
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
-                                        <Premain-Class>co.wangming.dragonfly.agent.DragonflyAgent</Premain-Class>
+                                        <Premain-Class>co.wangming.dragonfly.agent.core.DragonflyAgent</Premain-Class>
                                         <Can-Redefine-Classes>true</Can-Redefine-Classes>
                                         <Can-Retransform-Classes>true</Can-Retransform-Classes>
                                     </manifestEntries>

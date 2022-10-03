@@ -1,8 +1,7 @@
 package co.wangming.dragonfly.agent.plugin.thread.warpper;
 
-import co.wangming.dragonfly.agent.plugin.thread.ThreadTraceAdvise;
-import co.wangming.dragonfly.agent.trace.TraceContext;
-import co.wangming.dragonfly.agent.trace.TraceContextHolder;
+import co.wangming.dragonfly.agent.core.trace.TraceContext;
+import co.wangming.dragonfly.agent.core.trace.TraceContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

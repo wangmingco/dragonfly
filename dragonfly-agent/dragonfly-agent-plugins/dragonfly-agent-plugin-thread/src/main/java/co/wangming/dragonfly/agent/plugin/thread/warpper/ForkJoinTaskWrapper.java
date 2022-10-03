@@ -1,11 +1,9 @@
 package co.wangming.dragonfly.agent.plugin.thread.warpper;
 
-import co.wangming.dragonfly.agent.plugin.thread.ThreadTraceAdvise;
-import co.wangming.dragonfly.agent.trace.TraceContext;
+import co.wangming.dragonfly.agent.core.trace.TraceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.ForkJoinTask;
 
 public class ForkJoinTaskWrapper<T> extends ForkJoinTask<T> {
