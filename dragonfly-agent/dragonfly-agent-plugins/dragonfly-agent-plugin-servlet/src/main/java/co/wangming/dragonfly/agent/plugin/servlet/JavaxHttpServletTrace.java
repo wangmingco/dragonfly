@@ -1,5 +1,6 @@
-package co.wangming.dragonfly.agent.plugin.servlet.v3;
+package co.wangming.dragonfly.agent.plugin.servlet;
 
+import co.wangming.dragonfly.agent.plugin.servlet.ServletTraceTransformer;
 import co.wangming.dragonfly.agent.transform.transformer.Transform;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
@@ -8,7 +9,11 @@ import net.bytebuddy.matcher.ElementMatcher;
 import static net.bytebuddy.matcher.ElementMatchers.*;
 
 @Transform
-public class HttpServletTrace extends ServletTrace {
+public class JavaxHttpServletTrace extends ServletTraceTransformer {
+
+    public String packageName() {
+        return "javax.servlet.http";
+    }
 
     @Override
     public ElementMatcher.Junction<TypeDescription> typeConstraints() {
@@ -19,8 +24,8 @@ public class HttpServletTrace extends ServletTrace {
     public ElementMatcher.Junction<MethodDescription> methodConstraints() {
         return isMethod()
                 .and(takesArguments(2))
-                .and(takesArgument(0, named("javax.servlet.http.HttpServletRequest")))
-                .and(takesArgument(1, named("javax.servlet.http.HttpServletResponse")))
+                .and(takesArgument(0, named(packageName() + "HttpServletRequest")))
+                .and(takesArgument(1, named(packageName() + "HttpServletResponse")))
                 .and(nameStartsWith("do"));
     }
 }

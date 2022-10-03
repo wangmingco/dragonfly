@@ -19,13 +19,13 @@
         <module>dragonfly-example-simple</module>
         <module>dragonfly-example-jdbc</module>
         <module>dragonfly-example-springtx</module>
-        <module>dragonfly-example-springboot</module>
+        <module>dragonfly-example-servlet</module>
         <module>dragonfly-example-thread</module>
     </modules>
 
     <properties>
-        <log4j2.version>2.17.1</log4j2.version>
-        <slf4j.version>1.7.36</slf4j.version>
+        <log4j2.version>2.19.0</log4j2.version>
+        <slf4j.version>2.0.1</slf4j.version>
     </properties>
 
     <dependencies>
@@ -38,7 +38,7 @@
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
             <version>${log4j2.version}</version>
         </dependency>
 

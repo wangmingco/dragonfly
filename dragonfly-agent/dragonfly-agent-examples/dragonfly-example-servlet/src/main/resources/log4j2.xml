@@ -12,7 +12,7 @@
             </PatternLayout>
         </Console>
 
-        <File name="file" fileName="logs/example-springboot.log">
+        <File name="file" fileName="logs/example-servlet.log">
             <PatternLayout>
                 <Pattern>${PatternLayout}</Pattern>
             </PatternLayout>
@@ -21,17 +21,8 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.springframework" level="INFO" additivity="false">
-            <AppenderRef ref="consoleAppender"/>
-            <AppenderRef ref="file"/>
-        </Logger>
 
-        <Logger name="org.apache" level="WARN" additivity="false">
-            <AppenderRef ref="consoleAppender"/>
-            <AppenderRef ref="file"/>
-        </Logger>
-
-        <Root level="debug">
+        <Root level="info">
             <AppenderRef ref="consoleAppender"/>
             <AppenderRef ref="file"/>
         </Root>
