@@ -14,25 +14,56 @@
     <artifactId>dragonfly-agent-core</artifactId>
 
     <properties>
+        <compiler.version>3.9.0</compiler.version>
+        <shade.version>3.2.4</shade.version>
         <bytebuddy.version>1.12.8</bytebuddy.version>
         <reflections.version>0.10.2</reflections.version>
-        <shade.version>3.2.4</shade.version>
-        <compiler.version>3.9.0</compiler.version>
+        <log4j.version>2.19.0</log4j.version>
+        <slf4j.version>2.0.1</slf4j.version>
     </properties>
 
     <dependencies>
 
+        <!-- 整个工程基于bytebuddy -->
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
             <version>${bytebuddy.version}</version>
         </dependency>
 
+        <!-- 用于查找扩展插件 -->
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>${reflections.version}</version>
         </dependency>
+
+        <!-- slf4j核心包-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!--log4j2核心包-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <!--用于与slf4j保持桥接-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
 
     </dependencies>
 

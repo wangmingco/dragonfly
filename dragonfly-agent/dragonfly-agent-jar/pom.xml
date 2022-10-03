@@ -97,12 +97,6 @@
                                 </transformer>
                             </transformers>
                             <relocations>
-                                <!-- TODO FIX -> logback 改变包名报错 -->
-                                <!-- <relocation>-->
-                                <!-- <pattern>ch.qos.logback</pattern>-->
-                                <!-- <shadedPattern>co.wangming.dragonfly.ch.qos.logback</shadedPattern>-->
-                                <!-- </relocation>-->
-
                                 <relocation>
                                     <pattern>net.bytebuddy</pattern>
                                     <shadedPattern>co.wangming.dragonfly.net.bytebuddy</shadedPattern>
@@ -117,6 +111,18 @@
                                     <pattern>zipkin2</pattern>
                                     <shadedPattern>co.wangming.dragonfly.zipkin2</shadedPattern>
                                 </relocation>
+<!--                                <relocation>-->
+<!--                                    <pattern>org.slf4j</pattern>-->
+<!--                                    <shadedPattern>co.wangming.dragonfly.org.slf4j</shadedPattern>-->
+<!--                                </relocation>-->
+<!--                                <relocation>-->
+<!--                                    <pattern>org.apache.logging.log4j</pattern>-->
+<!--                                    <shadedPattern>co.wangming.dragonfly.org.apache.logging.log4j</shadedPattern>-->
+<!--                                </relocation>-->
+<!--                                <relocation>-->
+<!--                                    <pattern>org.apache.logging.slf4j</pattern>-->
+<!--                                    <shadedPattern>co.wangming.dragonfly.org.apache.logging.slf4j</shadedPattern>-->
+<!--                                </relocation>-->
                             </relocations>
                         </configuration>
                     </execution>
