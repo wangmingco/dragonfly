@@ -1,5 +1,8 @@
 package co.wangming.dragonfly.agent.core.trace;
 
+/**
+ * TODO 完善链路追踪功能
+ */
 public enum TraceContextHolder {
 
     DEFAULT;

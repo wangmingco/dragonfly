@@ -11,20 +11,21 @@ import static net.bytebuddy.matcher.ElementMatchers.*;
 public class JavaxHttpServletTrace extends ServletTraceTransformer {
 
     public String packageName() {
-        return "javax.servlet.http";
+        return "javax.servlet.http.";
     }
 
     @Override
     public ElementMatcher.Junction<TypeDescription> typeConstraints() {
-        return named(packageName() + "HttpServlet");
+        return hasSuperType(named(packageName() + "HttpServlet"));
     }
 
     @Override
     public ElementMatcher.Junction<MethodDescription> methodConstraints() {
         return isMethod()
+                .and(nameStartsWith("do"))
                 .and(takesArguments(2))
                 .and(takesArgument(0, named(packageName() + "HttpServletRequest")))
                 .and(takesArgument(1, named(packageName() + "HttpServletResponse")))
-                .and(nameStartsWith("do"));
+                ;
     }
 }
